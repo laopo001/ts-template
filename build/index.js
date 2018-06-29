@@ -6869,7 +6869,7 @@ __webpack_require__.r(__webpack_exports__);
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, June 29th 2018, 7:39:30 pm
+ * Last Modified: Friday, June 29th 2018, 7:42:32 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -6896,8 +6896,7 @@ var buffer2 = new ArrayBuffer(1000);
 var message2 = new capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"](buffer2, false, true);
 console.log('--------');
 var arr = capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"].initRoot(_date_capnp__WEBPACK_IMPORTED_MODULE_1__["DateArr"], message2);
-arr.initValue(0);
-arr.getValue().set(0, q);
+arr.getValue().set(1, q);
 console.log(arr.getValue().get(0).getYear());
 var q2 = arr.segment.message.toPackedArrayBuffer();
 var qq2 = new capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"](q2);

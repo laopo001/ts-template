@@ -5,7 +5,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, June 29th 2018, 7:39:43 pm
+ * Last Modified: Friday, June 29th 2018, 7:42:32 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -43,8 +43,8 @@ let message2 = new capnp.Message(buffer2, false, true)
 console.log('--------')
 let arr = capnp.Message.initRoot(DateArr, message2);
 
-arr.initValue(1);
-arr.getValue().set(0, q)
+
+arr.getValue().set(1, q)
 
 console.log(arr.getValue().get(0).getYear());
 

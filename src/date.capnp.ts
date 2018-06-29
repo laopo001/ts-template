@@ -17,3 +17,15 @@ export class Date extends __S {
     setDay(value: number): void { __S.setUint8(3, value, this); }
     toString(): string { return "Date_" + super.toString(); }
 }
+export class DateArr extends __S {
+    static readonly _capnp = { displayName: "DateArr", id: "f74dc6379e812e3f", size: new __O(0, 1) };
+    static _Value: capnp.ListCtor<Date>;
+    adoptValue(value: capnp.Orphan<capnp.List<Date>>): void { __S.adopt(value, __S.getPointer(0, this)); }
+    disownValue(): capnp.Orphan<capnp.List<Date>> { return __S.disown(this.getValue()); }
+    getValue(): capnp.List<Date> { return __S.getList(0, DateArr._Value, this); }
+    hasValue(): boolean { return !__S.isNull(__S.getPointer(0, this)); }
+    initValue(length: number): capnp.List<Date> { return __S.initList(0, DateArr._Value, length, this); }
+    setValue(value: capnp.List<Date>): void { __S.copyFrom(value, __S.getPointer(0, this)); }
+    toString(): string { return "DateArr_" + super.toString(); }
+}
+DateArr._Value = capnp.CompositeList(Date);

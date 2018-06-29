@@ -6785,13 +6785,14 @@ function __importDefault(mod) {
 /*!***************************!*\
   !*** ./src/date.capnp.ts ***!
   \***************************/
-/*! exports provided: _capnpFileId, Date */
+/*! exports provided: _capnpFileId, Date, DateArr */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_capnpFileId", function() { return _capnpFileId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Date", function() { return Date; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DateArr", function() { return DateArr; });
 /* harmony import */ var capnp_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! capnp-ts */ "./node_modules/capnp-ts/lib/index.js");
 /* harmony import */ var capnp_ts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(capnp_ts__WEBPACK_IMPORTED_MODULE_0__);
 /**
@@ -6807,6 +6808,8 @@ var __extends = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+/* tslint:disable */
+
 
 var _capnpFileId = "dbb9ad1f14bf0b36";
 var Date = /** @class */ (function (_super) {
@@ -6825,6 +6828,23 @@ var Date = /** @class */ (function (_super) {
     return Date;
 }(capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"]));
 
+var DateArr = /** @class */ (function (_super) {
+    __extends(DateArr, _super);
+    function DateArr() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    DateArr.prototype.adoptValue = function (value) { capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"].adopt(value, capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"].getPointer(0, this)); };
+    DateArr.prototype.disownValue = function () { return capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"].disown(this.getValue()); };
+    DateArr.prototype.getValue = function () { return capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"].getList(0, DateArr._Value, this); };
+    DateArr.prototype.hasValue = function () { return !capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"].isNull(capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"].getPointer(0, this)); };
+    DateArr.prototype.initValue = function (length) { return capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"].initList(0, DateArr._Value, length, this); };
+    DateArr.prototype.setValue = function (value) { capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"].copyFrom(value, capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"].getPointer(0, this)); };
+    DateArr.prototype.toString = function () { return "DateArr_" + _super.prototype.toString.call(this); };
+    DateArr._capnp = { displayName: "DateArr", id: "f74dc6379e812e3f", size: new capnp_ts__WEBPACK_IMPORTED_MODULE_0__["ObjectSize"](0, 1) };
+    return DateArr;
+}(capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Struct"]));
+
+DateArr._Value = capnp_ts__WEBPACK_IMPORTED_MODULE_0__["CompositeList"](Date);
 
 
 /***/ }),
@@ -6849,7 +6869,7 @@ __webpack_require__.r(__webpack_exports__);
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, June 29th 2018, 12:07:33 pm
+ * Last Modified: Friday, June 29th 2018, 7:39:30 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -6860,16 +6880,9 @@ function loadMessage(buffer) {
     var message = new capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"](buffer);
     return message.getRoot(_date_capnp__WEBPACK_IMPORTED_MODULE_1__["Date"]);
 }
-// const date = {
-//     year: 1992,
-//     month: 10,
-//     day: 25
-// }
 var buffer = new ArrayBuffer(_date_capnp__WEBPACK_IMPORTED_MODULE_1__["Date"]._capnp.size.dataByteLength);
 var message = new capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"](buffer, false, true);
-console.log(1);
 var date = capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"].initRoot(_date_capnp__WEBPACK_IMPORTED_MODULE_1__["Date"], message);
-console.log(2);
 date.setYear(1992);
 date.setMonth(10);
 date.setDay(25);
@@ -6879,6 +6892,16 @@ date.setDay(25);
 //     capnp.Message.toArrayBuffer(new capnp.Message())
 var q = loadMessage(date.segment.message.toPackedArrayBuffer());
 console.log(q.getYear());
+var buffer2 = new ArrayBuffer(1000);
+var message2 = new capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"](buffer2, false, true);
+console.log('--------');
+var arr = capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"].initRoot(_date_capnp__WEBPACK_IMPORTED_MODULE_1__["DateArr"], message2);
+arr.initValue(0);
+arr.getValue().set(0, q);
+console.log(arr.getValue().get(0).getYear());
+var q2 = arr.segment.message.toPackedArrayBuffer();
+var qq2 = new capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"](q2);
+// console.log(qq2.getRoot(DateArr).getValue().get(0).getYear());
 
 
 /***/ })

@@ -5,3 +5,7 @@ struct Date {
   month @1 :UInt8;
   day @2 :UInt8;
 }
+
+struct DateArr {
+  value @0 :List(Date);
+}

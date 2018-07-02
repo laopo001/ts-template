@@ -5,11 +5,18 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, June 29th 2018, 12:01:28 am
+ * Last Modified: Monday, July 2nd 2018, 10:59:18 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
+import * as module from './assets/compiled.js';
+console.log(module);
+const Awesome = module.awesomepackage.AwesomeMessage;
+console.log(Awesome);
+var message = Awesome.create({ awesomeField: "hello" });
 
-console.log(123)
+let buffer = Awesome.encode(message).finish();
+console.log(buffer);
+console.log(Awesome.decode(buffer));

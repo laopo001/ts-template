@@ -30,7 +30,7 @@
     "allowSyntheticDefaultImports": true
   },
   "files": [
-    "src/**/*"
+    "src/**"
   ],
   "include": [
     "src","typings"

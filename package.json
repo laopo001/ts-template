@@ -48,6 +48,7 @@
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
     "hypergl": "^0.0.1-beta.13",
+    "protobufjs": "^6.8.6",
     "whatwg-fetch": "^2.0.4"
   }
 }

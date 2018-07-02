@@ -5,18 +5,45 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Monday, July 2nd 2018, 10:59:18 pm
+ * Last Modified: Tuesday, July 3rd 2018, 1:15:20 am
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
-import * as module from './assets/compiled.js';
-console.log(module);
-const Awesome = module.awesomepackage.AwesomeMessage;
-console.log(Awesome);
+import { awesomepackage } from './assets/compiled.js';
+
+const Awesome = awesomepackage.AwesomeMessage;
+
 var message = Awesome.create({ awesomeField: "hello" });
 
-let buffer = Awesome.encode(message).finish();
-console.log(buffer);
-console.log(Awesome.decode(buffer));
+let Uint8Arr = Awesome.encode(message).finish();
+
+let worker = new Worker('./webworker.js');
+
+//////////////////////////////////////////
+
+
+console.log('postMessage copy start:', Uint8Arr, Uint8Arr.buffer);
+let m: any = {
+    type: 'copy',
+    Uint8Arr
+}
+worker.postMessage(m);
+console.log('postMessage copy end:', Uint8Arr, Uint8Arr.buffer);
+
+
+
+console.log('postMessage move start:', Uint8Arr, Uint8Arr.buffer);
+m = {
+    type: 'move',
+    byteOffset: 0,
+    length: Uint8Arr.length,
+    buffer: Uint8Arr.buffer
+}
+worker.postMessage(m, [Uint8Arr.buffer]);
+console.log('postMessage move end:', Uint8Arr, Uint8Arr.buffer);
+
+
+
+

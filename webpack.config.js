@@ -7,7 +7,8 @@ module.exports = function (env, webpackConfig) {
     return {
         //页面入口文件配置
         entry: {
-            index: `./src/index`
+            index: `./src/index`,
+            webworker: `./src/webworker`
         },
         //入口文件输出配置
         output: {

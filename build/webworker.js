@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/webworker.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -3164,10 +3164,10 @@ const awesomepackage = $root.awesomepackage = (() => {
 
 /***/ }),
 
-/***/ "./src/index.ts":
-/*!**********************!*\
-  !*** ./src/index.ts ***!
-  \**********************/
+/***/ "./src/webworker.ts":
+/*!**************************!*\
+  !*** ./src/webworker.ts ***!
+  \**************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3175,42 +3175,34 @@ const awesomepackage = $root.awesomepackage = (() => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_compiled_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/compiled.js */ "./src/assets/compiled.js");
 /**
- * File: c:\Users\35327\Githubs\ts-template\src\index.ts
+ * File: c:\Users\35327\Githubs\ts-template\src\webworker.ts
  * Project: c:\Users\35327\Githubs\ts-template
- * Created Date: Friday, June 29th 2018, 12:01:19 am
+ * Created Date: Tuesday, July 3rd 2018, 12:36:22 am
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Tuesday, July 3rd 2018, 1:15:20 am
+ * Last Modified: Tuesday, July 3rd 2018, 1:14:48 am
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
 var Awesome = _assets_compiled_js__WEBPACK_IMPORTED_MODULE_0__["awesomepackage"].AwesomeMessage;
-var message = Awesome.create({ awesomeField: "hello" });
-var Uint8Arr = Awesome.encode(message).finish();
-var worker = new Worker('./webworker.js');
-//////////////////////////////////////////
-console.log('postMessage copy start:', Uint8Arr, Uint8Arr.buffer);
-var m = {
-    type: 'copy',
-    Uint8Arr: Uint8Arr
+self.onmessage = function (message) {
+    var data = message.data;
+    if (data.type === 'move') {
+        var Uint8Arr = new Uint8Array(data.buffer, data.byteOffset, data.length);
+        console.log('receive move:', message, data, Uint8Arr);
+        console.log('receive move result:', Awesome.decode(Uint8Arr));
+    }
+    else {
+        console.log('receive copy:', message, data);
+        console.log('receive copy result:', Awesome.decode(data.Uint8Arr));
+    }
 };
-worker.postMessage(m);
-console.log('postMessage copy end:', Uint8Arr, Uint8Arr.buffer);
-console.log('postMessage move start:', Uint8Arr, Uint8Arr.buffer);
-m = {
-    type: 'move',
-    byteOffset: 0,
-    length: Uint8Arr.length,
-    buffer: Uint8Arr.buffer
-};
-worker.postMessage(m, [Uint8Arr.buffer]);
-console.log('postMessage move end:', Uint8Arr, Uint8Arr.buffer);
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=webworker.js.map

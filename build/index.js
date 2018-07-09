@@ -100,12 +100,36 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, June 29th 2018, 12:01:28 am
+ * Last Modified: Monday, July 9th 2018, 11:34:31 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 console.log(123);
+var lengthOfLongestSubstring = function (s) {
+    var len = s.length;
+    var arr = [];
+    var max = 0;
+    for (var i = 0; i < len; i++) {
+        var character = s[i];
+        if (arr.includes(character)) {
+            var t = void 0;
+            while (t = arr.shift()) {
+                if (t === character) {
+                    break;
+                }
+            }
+            arr.push(character);
+        }
+        else {
+            arr.push(character);
+        }
+        max = Math.max(max, arr.length);
+    }
+    console.log(max);
+    return max;
+};
+lengthOfLongestSubstring("abcabcbb");
 
 
 /***/ })

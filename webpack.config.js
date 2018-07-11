@@ -12,7 +12,8 @@ module.exports = function (env, webpackConfig) {
         //入口文件输出配置
         output: {
             path: path.resolve(__dirname, 'build'),
-            filename: '[name].js'
+            filename: '[name].js',
+            libraryTarget: "commonjs",
         },
         //插件项
         plugins: [
@@ -61,9 +62,12 @@ module.exports = function (env, webpackConfig) {
             alias: {
             }
         },
-        externals: {
-
-        },
+        externals: [
+            'robotjs',
+            // nodeExternals({
+            //     whitelist: []
+            // })
+        ],
         devtool: 'source-map',
         mode: 'development',
         performance: { hints: false }

@@ -1,4 +1,4 @@
-/******/ (function(modules) { // webpackBootstrap
+(function(e, a) { for(var i in a) e[i] = a[i]; }(exports, /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -90,9 +90,13 @@
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var robotjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! robotjs */ "robotjs");
+/* harmony import */ var robotjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(robotjs__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * File: c:\Users\35327\Githubs\ts-template\src\index.ts
  * Project: c:\Users\35327\Githubs\ts-template
@@ -100,15 +104,41 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, June 29th 2018, 12:01:28 am
+ * Last Modified: Wednesday, July 11th 2018, 8:07:01 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
-console.log(123);
+// Move the mouse across the screen as a sine wave.
+// var robot = require("robotjs");
 
+// Speed up the mouse.
+robotjs__WEBPACK_IMPORTED_MODULE_0__["setMouseDelay"](2);
+var twoPI = Math.PI * 2.0;
+var screenSize = robotjs__WEBPACK_IMPORTED_MODULE_0__["getScreenSize"]();
+var height = (screenSize.height / 2) - 10;
+var width = screenSize.width;
+for (var x = 0; x < width; x++) {
+    var y = height * Math.sin((twoPI * x) / width) + height;
+    robotjs__WEBPACK_IMPORTED_MODULE_0__["moveMouse"](x, y);
+}
+var img = robotjs__WEBPACK_IMPORTED_MODULE_0__["screen"].capture(0, 0, screenSize.width, screenSize.height);
+var color = img.colorAt(100, 100);
+console.log(color);
+
+
+/***/ }),
+
+/***/ "robotjs":
+/*!**************************!*\
+  !*** external "robotjs" ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("robotjs");
 
 /***/ })
 
-/******/ });
+/******/ })));
 //# sourceMappingURL=index.js.map

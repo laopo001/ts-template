@@ -100,7 +100,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Monday, July 9th 2018, 11:34:31 pm
+ * Last Modified: Wednesday, July 11th 2018, 12:03:37 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -130,6 +130,85 @@ var lengthOfLongestSubstring = function (s) {
     return max;
 };
 lengthOfLongestSubstring("abcabcbb");
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function (height) {
+    var max = 0;
+    var left = 0;
+    var right = height.length - 1;
+    while (left < right) {
+        if (height[left] > height[right]) {
+            max = Math.max(max, height[right] * (right - left));
+            right = right - 1;
+        }
+        else {
+            max = Math.max(max, height[left] * (right - left));
+            left = left + 1;
+        }
+    }
+    return max;
+};
+var a = maxArea([1, 2, 1]);
+console.log(a);
+/**
+* Definition for binary tree with next pointer.
+* function TreeLinkNode(val) {
+*     this.val = val;
+*     this.left = this.right = this.next = null;
+* }
+*/
+/**
+ * @param {TreeLinkNode} root
+ * @return {void} Do not return anything, modify tree in-place instead.
+ */
+var TreeNode = /** @class */ (function () {
+    function TreeNode(val, left, right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+    return TreeNode;
+}());
+var root = new TreeNode(1, new TreeNode(2, new TreeNode(4), new TreeNode(5)), new TreeNode(3, new TreeNode(6), new TreeNode(7)));
+var connect = function (root) {
+    if (root == null)
+        return;
+    var arr = [];
+    arr.push(root);
+    run(arr, arr);
+    // console.log(arr)
+    var t = 1;
+    tag1: for (var i = 0; i < arr.length; i++) {
+        // let t = 1;
+        // while (2 ** t <= i + 2) {
+        //     if (2 ** t === i + 2) {
+        //         continue tag1;
+        //     }
+        //     t++;
+        // }
+        if (Math.pow(2, t) === i + 2) {
+            t++;
+            continue tag1;
+        }
+        arr[i] && (arr[i].next = arr[i + 1]);
+    }
+    console.log(root);
+    function run(children, arr) {
+        var newChildren = [];
+        for (var i = 0; i < children.length; i++) {
+            if (children[i] == null) {
+                continue;
+            }
+            newChildren.push(children[i].left);
+            newChildren.push(children[i].right);
+        }
+        arr.push.apply(arr, newChildren);
+        newChildren.length && run(newChildren, arr);
+    }
+};
+console.log(connect(root));
 
 
 /***/ })

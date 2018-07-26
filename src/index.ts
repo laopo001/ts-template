@@ -5,11 +5,11 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, June 29th 2018, 12:01:28 am
+ * Last Modified: Thursday, July 26th 2018, 2:54:22 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
+import { A } from './a';
 
-
-console.log(123)
+console.log(A);

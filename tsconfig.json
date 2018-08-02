@@ -25,15 +25,15 @@
       "./typings"
     ],
     "outDir": "build/output",
-    "types": [
-    ],
+    "types": [],
     "allowSyntheticDefaultImports": true
   },
   "files": [
     "src/**/*"
   ],
   "include": [
-    "src","typings"
+    "src",
+    "typings"
   ],
   "exclude": [
     "node_modules"

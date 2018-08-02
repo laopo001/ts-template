@@ -5,31 +5,64 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Thursday, August 2nd 2018, 6:56:41 pm
+ * Last Modified: Friday, August 3rd 2018, 12:29:31 am
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
-// import * as fetch from 'isomorphic-fetch';
+import * as fetch from 'isomorphic-fetch';
 
 async function download(url) {
-    let firstResponse = await fetch(url, {
-        "headers": {
-            "Range": "bytes=0-0",
-        },
-        "method": "GET",
-    }).catch(err => { console.error(err); })
+    function request(url, start, end: any = '') {
+        return fetch(url, {
+            'headers': {
+                'Range': `bytes=${start}-${end}`,
+            },
+            'method': 'GET',
+            // 'mode': 'cors'
+        })
+    }
+
+    let firstResponse = await request(url, 0, 0).catch(err => { console.error(err); })
     if (firstResponse && firstResponse.status === 206) {
-        let o = firstResponse.headers.keys()
-        for (let x of o) {
-            console.log(x);
+        let len = firstResponse.headers.get('Content-Range').split('/')[1];
+        let type = firstResponse.headers.get('Content-Type');
+        console.log(firstResponse.status, len);
+        let byteOffset = 0;
+        let arr = [];
+        let q = 1000;
+        while (byteOffset + q <= len) {
+            arr.push(request(url, byteOffset, byteOffset + q - 1).then(x => x.arrayBuffer()))
+            byteOffset += q;
         }
-        console.log(firstResponse.status);
+        arr.push(request(url, byteOffset).then(x => x.arrayBuffer()));
+        let buffers = await Promise.all(arr);
+
+        let i = 0;
+        let res = new Uint8Array(len);
+        new Uint8Array
+        buffers.forEach(x => {
+            new Uint8Array(x).forEach(y => {
+                res[i] = y;
+                i++;
+            })
+        })
+        let blob = new Blob([res], { type });
+        console.log(res, blob);
+        // buffers = await Promise.all(buffers.map(x =>
+        //     x.arrayBuffer()
+        // ))
+
+        // console.log(buffers)
+
     } else {
         console.error('不支持分段下载');
     }
 
 }
 
-download("https://dadigua.oss-cn-shenzhen.aliyuncs.com/IMG_0485.JPG")
+
+// download('https://dadigua.oss-cn-shenzhen.aliyuncs.com/IMG_0485.JPG')
+
+
 console.log(123)

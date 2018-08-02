@@ -100,7 +100,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, August 3rd 2018, 1:01:32 am
+ * Last Modified: Friday, August 3rd 2018, 1:09:47 am
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -144,7 +144,7 @@ var VERSION = 'v0';
 var cacheFiles = [
     '/'
 ];
-var hostReg = /localhost/;
+var hostReg = /localhost|aliyuncs/;
 self.addEventListener('install', function (evt) {
     console.log('installing…');
     evt.waitUntil(caches.open(VERSION).then(function (cache) {

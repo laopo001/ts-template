@@ -5,7 +5,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, August 3rd 2018, 1:09:47 am
+ * Last Modified: Friday, August 3rd 2018, 9:59:35 am
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -29,7 +29,7 @@ self.addEventListener('install', function (evt) {
         })
     );
 });
-
+declare const clients: Clients;
 self.addEventListener('activate', function (event) {
     console.log('activating…');
     event.waitUntil(

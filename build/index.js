@@ -632,12 +632,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, August 3rd 2018, 12:29:31 am
+ * Last Modified: Friday, August 3rd 2018, 3:34:53 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 var fetch = __webpack_require__(/*! isomorphic-fetch */ "./node_modules/isomorphic-fetch/fetch-npm-browserify.js");
+var test_fetch_1 = __webpack_require__(/*! ./test-fetch */ "./src/test-fetch.ts");
 function download(url) {
     return __awaiter(this, void 0, void 0, function () {
         function request(url, start, end) {
@@ -649,10 +650,10 @@ function download(url) {
                 'method': 'GET',
             });
         }
-        var firstResponse, len, type, byteOffset, arr, q, buffers, i_1, res_1, blob;
+        var firstResponse, len, type, byteOffset, arr, q, buffers, i_1, result_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request(url, 0, 0).catch(function (err) { console.error(err); })];
+                case 0: return [4 /*yield*/, request(url, 0, 0)];
                 case 1:
                     firstResponse = _a.sent();
                     if (!(firstResponse && firstResponse.status === 206)) return [3 /*break*/, 3];
@@ -671,17 +672,17 @@ function download(url) {
                 case 2:
                     buffers = _a.sent();
                     i_1 = 0;
-                    res_1 = new Uint8Array(len);
+                    result_1 = new Uint8Array(len);
                     new Uint8Array;
                     buffers.forEach(function (x) {
                         new Uint8Array(x).forEach(function (y) {
-                            res_1[i_1] = y;
+                            result_1[i_1] = y;
                             i_1++;
                         });
                     });
-                    blob = new Blob([res_1], { type: type });
-                    console.log(res_1, blob);
-                    return [3 /*break*/, 4];
+                    // let blob = new Blob([res], { type });
+                    // console.log(res, blob);
+                    return [2 /*return*/, result_1];
                 case 3:
                     console.error('不支持分段下载');
                     _a.label = 4;
@@ -690,8 +691,204 @@ function download(url) {
         });
     });
 }
-// download('https://dadigua.oss-cn-shenzhen.aliyuncs.com/IMG_0485.JPG')
-console.log(123);
+function request(url, start, end) {
+    if (end === void 0) { end = ''; }
+    return fetch(url, {
+        'headers': {
+            'Range': "bytes=" + start + "-" + end,
+        },
+        'method': 'GET',
+    });
+}
+var Download = /** @class */ (function () {
+    function Download(option) {
+        if (option === void 0) { option = {}; }
+        this.option = option;
+        // private threadPool = [];
+        this.activeThreadCount = 0;
+        this.tasks = {};
+        this.listen = {};
+        this.option = Object.assign({}, { byteLength: 1024 * 80, limit: 8, format: 'Blob' }, this.option);
+    }
+    Download.prototype.download = function (url) {
+        return __awaiter(this, void 0, void 0, function () {
+            var firstResponse, len, type, byteOffset, arr, q, i;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.listen[url] = { done: false, callback: null, doneCallBack: null, child: [], result: null, resultType: null };
+                        return [4 /*yield*/, request(url, 0, 0)];
+                    case 1:
+                        firstResponse = _a.sent();
+                        if (firstResponse && firstResponse.status === 206) {
+                            len = firstResponse.headers.get('Content-Range').split('/')[1] | 0;
+                            type = firstResponse.headers.get('Content-Type');
+                            this.listen[url].result = new Uint8Array(len);
+                            this.listen[url].resultType = type;
+                            console.log('length:', len);
+                            byteOffset = 0;
+                            arr = this.tasks[url] || (this.tasks[url] = []);
+                            q = this.option.byteLength;
+                            i = 0;
+                            while (byteOffset + q <= len) {
+                                arr.push([url, byteOffset, byteOffset + q - 1, i]);
+                                byteOffset += q;
+                                i++;
+                            }
+                            arr.push([url, byteOffset, , i]);
+                            this.runTasks(url);
+                            return [2 /*return*/, { length: len, type: type }];
+                        }
+                        else {
+                            console.error('不支持分段下载');
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Download.prototype.runTasks = function (url) {
+        var _this = this;
+        var task;
+        var i = 0;
+        while ((task = this.tasks[url].shift()) && i < this.option.limit) {
+            (function (task) {
+                i++;
+                _this.activeThreadCount++;
+                request.apply(null, task).then(function (x) { return x.arrayBuffer(); }).then(function (x) {
+                    _this.data.call(_this, task, x);
+                });
+            })(task);
+        }
+    };
+    Download.prototype.done = function (url) {
+        if (this.listen[url].done === true) {
+            return;
+        }
+        ;
+        this.listen[url].done = true;
+        var result;
+        if (this.option.format === 'ArrayBuffer') {
+            result = this.listen[url].result;
+        }
+        if (this.option.format === 'Blob') {
+            result = new Blob(this.listen[url].child, { type: this.listen[url].resultType });
+        }
+        this.listen[url].doneCallBack && this.listen[url].doneCallBack(result);
+    };
+    Download.prototype.data = function (t, buffer) {
+        var _this = this;
+        try {
+            this.activeThreadCount--;
+            var start = t[1];
+            var url = t[0];
+            var index = t[3];
+            this.listen[url].child[index] = buffer;
+            this.listen[url].callback && this.listen[url].callback(t, buffer);
+            var task = this.tasks[url].shift();
+            if (task == null) {
+                // Promise.all(this.threadPool).then(() => {
+                //     this.done(url);
+                // })
+                if (this.activeThreadCount === 0) {
+                    this.done(url);
+                }
+                return;
+            }
+            this.activeThreadCount++;
+            request.apply(null, task).then(function (x) { return x.arrayBuffer(); }).then(function (x) {
+                _this.data.call(_this, t, x);
+            });
+        }
+        catch (e) {
+            debugger;
+        }
+    };
+    Download.prototype.onData = function (url, cb) {
+        this.listen[url].callback = cb;
+    };
+    Download.prototype.onDone = function (url, cb) {
+        this.listen[url].doneCallBack = cb;
+    };
+    Download.prototype.offline = function () {
+    };
+    return Download;
+}());
+function test() {
+    var nameStart = 'markStartplus';
+    var nameEnd = 'markEndplus';
+    window.performance.mark(nameStart);
+    var url = 'https://dadigua.oss-cn-shenzhen.aliyuncs.com/dd_3.4.8.exe';
+    var c = new Download({ format: 'Blob', byteLength: 10000000, limit: 8, });
+    c.download(url);
+    c.onDone(url, function (res) {
+        console.log(res);
+        var a = document.createElement('a');
+        var url = window.URL.createObjectURL(res);
+        var filename = 'dd_3.4.8.exe';
+        a.href = url;
+        a.download = filename;
+        a.click();
+        window.URL.revokeObjectURL(url);
+        window.performance.mark(nameEnd);
+        window.performance.measure('plus', nameStart, nameEnd);
+        var measure = window.performance.getEntriesByName('plus');
+        console.log(measure);
+        // testFetch();
+    });
+}
+// test()
+test_fetch_1.testFetch().then(function () {
+    test();
+});
+
+
+/***/ }),
+
+/***/ "./src/test-fetch.ts":
+/*!***************************!*\
+  !*** ./src/test-fetch.ts ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * File: c:\Users\35327\Projects\ts-template\src\test-fetch.ts
+ * Project: c:\Users\35327\Projects\ts-template
+ * Created Date: Friday, August 3rd 2018, 2:37:56 pm
+ * @author: liaodh
+ * @summary: short description for the file
+ * -----
+ * Last Modified: Friday, August 3rd 2018, 2:46:44 pm
+ * Modified By: liaodh
+ * -----
+ * Copyright (c) 2018 jiguang
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+function testFetch() {
+    var nameStart = 'markStart';
+    var nameEnd = 'markEnd';
+    var url = 'https://dadigua.oss-cn-shenzhen.aliyuncs.com/dd_3.4.8.exe';
+    window.performance.mark(nameStart);
+    return fetch(url).then(function (x) { return x.blob(); }).then(function (res) {
+        console.log(res);
+        var a = document.createElement('a');
+        var url = window.URL.createObjectURL(res);
+        var filename = 'dd_3.4.8.exe';
+        a.href = url;
+        a.download = filename;
+        a.click();
+        window.URL.revokeObjectURL(url);
+        window.performance.mark(nameEnd);
+        window.performance.measure('fetch', nameStart, nameEnd);
+        var measure = window.performance.getEntriesByName('fetch');
+        console.log(measure);
+        return res;
+    });
+}
+exports.testFetch = testFetch;
 
 
 /***/ })

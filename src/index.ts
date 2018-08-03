@@ -5,7 +5,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, August 3rd 2018, 3:34:53 pm
+ * Last Modified: Friday, August 3rd 2018, 7:30:16 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -103,24 +103,26 @@ class Download {
             }
             arr.push([url, byteOffset, , i]);
 
-            this.runTasks(url);
-            return { length: len, type }
+            this.runTasks();
+            return { length: len, type, cout: i }
 
         } else {
             console.error('不支持分段下载');
         }
     }
-    private runTasks(url) {
-        let task;
-        let i = 0;
-        while ((task = this.tasks[url].shift()) && i < this.option.limit) {
-            ((task) => {
-                i++;
-                this.activeThreadCount++;
-                request.apply(null, task).then(x => x.arrayBuffer()).then(x => {
-                    this.data.call(this, task, x)
-                });
-            })(task)
+    private runTasks() {
+        for (let url in this.tasks) {
+            let task;
+            let i = 0;
+            while ((task = this.tasks[url].shift()) && i < this.option.limit) {
+                ((task) => {
+                    i++;
+                    this.activeThreadCount++;
+                    request.apply(null, task).then(x => x.arrayBuffer()).then(x => {
+                        this.data.call(this, task, x)
+                    }).catch(this.error.bind(this, task));;
+                })(task)
+            }
         }
     }
     private done(url) {
@@ -145,25 +147,49 @@ class Download {
             this.listen[url].callback && this.listen[url].callback(t, buffer);
             let task = this.tasks[url].shift();
             if (task == null) {
-                // Promise.all(this.threadPool).then(() => {
-                //     this.done(url);
-                // })
                 if (this.activeThreadCount === 0) {
                     this.done(url);
                 }
                 return;
             }
+            if (this.isPause === true) { return; }
             this.activeThreadCount++;
             request.apply(null, task).then(x => x.arrayBuffer()).then(x => {
                 this.data.call(this, t, x)
-            });
+            }).catch(this.error.bind(this, task));
         }
         catch (e) {
             debugger;
         }
     }
+    private errorCount = 1;
+    private error(task, err) {
+        let url = task[0];
+        if (this.errorCount >= this.option.limit) {
+            console.error(`重试超过${this.option.limit}次，暂停`);
+            this.pause();
+            this.onErrorCallback && this.onErrorCallback()
+        } else {
+            console.warn('重试');
+        }
+        this.tasks[url].push(task);
+        this.activeThreadCount--;
+        this.errorCount++;
+    }
+    isPause = false;
+    pause() {
+        this.isPause = true;
+    }
+    restart() {
+        this.isPause = false;
+        this.runTasks();
+    }
     listen = {
     };
+    private onErrorCallback;
+    onError(cb) {
+        this.onErrorCallback = cb;
+    }
     onData(url, cb) {
         this.listen[url].callback = cb;
     }
@@ -180,8 +206,20 @@ function test() {
     var nameEnd = 'markEndplus';
     window.performance.mark(nameStart);
     let url = 'https://dadigua.oss-cn-shenzhen.aliyuncs.com/dd_3.4.8.exe';
-    let c = new Download({ format: 'Blob', byteLength: 10000000, limit: 8, });
-    c.download(url)
+    let c = new Download({ format: 'Blob', byteLength: 5000000, limit: 2, });
+    c.download(url);
+    // setTimeout(() => {
+    //     c.pause()
+    //     setTimeout(() => {
+    //         c.restart()
+    //     }, 10000);
+    // }, 3000);
+    c.onError(() => {
+
+        setTimeout(() => {
+            c.restart()
+        }, 5000);
+    })
     c.onDone(url, function (res) {
         console.log(res);
         var a = document.createElement('a');
@@ -200,11 +238,11 @@ function test() {
     })
 }
 
-// test()
+test()
 
-testFetch().then(() => {
-    test()
-})
+// testFetch().then(() => {
+// test()
+// })
 
 
 

@@ -632,13 +632,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, August 3rd 2018, 3:34:53 pm
+ * Last Modified: Friday, August 3rd 2018, 7:30:16 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 var fetch = __webpack_require__(/*! isomorphic-fetch */ "./node_modules/isomorphic-fetch/fetch-npm-browserify.js");
-var test_fetch_1 = __webpack_require__(/*! ./test-fetch */ "./src/test-fetch.ts");
 function download(url) {
     return __awaiter(this, void 0, void 0, function () {
         function request(url, start, end) {
@@ -707,6 +706,8 @@ var Download = /** @class */ (function () {
         // private threadPool = [];
         this.activeThreadCount = 0;
         this.tasks = {};
+        this.errorCount = 1;
+        this.isPause = false;
         this.listen = {};
         this.option = Object.assign({}, { byteLength: 1024 * 80, limit: 8, format: 'Blob' }, this.option);
     }
@@ -736,8 +737,8 @@ var Download = /** @class */ (function () {
                                 i++;
                             }
                             arr.push([url, byteOffset, , i]);
-                            this.runTasks(url);
-                            return [2 /*return*/, { length: len, type: type }];
+                            this.runTasks();
+                            return [2 /*return*/, { length: len, type: type, cout: i }];
                         }
                         else {
                             console.error('不支持分段下载');
@@ -747,18 +748,25 @@ var Download = /** @class */ (function () {
             });
         });
     };
-    Download.prototype.runTasks = function (url) {
+    Download.prototype.runTasks = function () {
         var _this = this;
-        var task;
-        var i = 0;
-        while ((task = this.tasks[url].shift()) && i < this.option.limit) {
-            (function (task) {
-                i++;
-                _this.activeThreadCount++;
-                request.apply(null, task).then(function (x) { return x.arrayBuffer(); }).then(function (x) {
-                    _this.data.call(_this, task, x);
-                });
-            })(task);
+        var _loop_1 = function (url) {
+            var task = void 0;
+            var i = 0;
+            while ((task = this_1.tasks[url].shift()) && i < this_1.option.limit) {
+                (function (task) {
+                    i++;
+                    _this.activeThreadCount++;
+                    request.apply(null, task).then(function (x) { return x.arrayBuffer(); }).then(function (x) {
+                        _this.data.call(_this, task, x);
+                    }).catch(_this.error.bind(_this, task));
+                    ;
+                })(task);
+            }
+        };
+        var this_1 = this;
+        for (var url in this.tasks) {
+            _loop_1(url);
         }
     };
     Download.prototype.done = function (url) {
@@ -787,22 +795,46 @@ var Download = /** @class */ (function () {
             this.listen[url].callback && this.listen[url].callback(t, buffer);
             var task = this.tasks[url].shift();
             if (task == null) {
-                // Promise.all(this.threadPool).then(() => {
-                //     this.done(url);
-                // })
                 if (this.activeThreadCount === 0) {
                     this.done(url);
                 }
                 return;
             }
+            if (this.isPause === true) {
+                return;
+            }
             this.activeThreadCount++;
             request.apply(null, task).then(function (x) { return x.arrayBuffer(); }).then(function (x) {
                 _this.data.call(_this, t, x);
-            });
+            }).catch(this.error.bind(this, task));
         }
         catch (e) {
             debugger;
         }
+    };
+    Download.prototype.error = function (task, err) {
+        var url = task[0];
+        if (this.errorCount >= this.option.limit) {
+            console.error("\u91CD\u8BD5\u8D85\u8FC7" + this.option.limit + "\u6B21\uFF0C\u6682\u505C");
+            this.pause();
+            this.onErrorCallback && this.onErrorCallback();
+        }
+        else {
+            console.warn('重试');
+        }
+        this.tasks[url].push(task);
+        this.activeThreadCount--;
+        this.errorCount++;
+    };
+    Download.prototype.pause = function () {
+        this.isPause = true;
+    };
+    Download.prototype.restart = function () {
+        this.isPause = false;
+        this.runTasks();
+    };
+    Download.prototype.onError = function (cb) {
+        this.onErrorCallback = cb;
     };
     Download.prototype.onData = function (url, cb) {
         this.listen[url].callback = cb;
@@ -819,8 +851,19 @@ function test() {
     var nameEnd = 'markEndplus';
     window.performance.mark(nameStart);
     var url = 'https://dadigua.oss-cn-shenzhen.aliyuncs.com/dd_3.4.8.exe';
-    var c = new Download({ format: 'Blob', byteLength: 10000000, limit: 8, });
+    var c = new Download({ format: 'Blob', byteLength: 5000000, limit: 2, });
     c.download(url);
+    // setTimeout(() => {
+    //     c.pause()
+    //     setTimeout(() => {
+    //         c.restart()
+    //     }, 10000);
+    // }, 3000);
+    c.onError(function () {
+        setTimeout(function () {
+            c.restart();
+        }, 5000);
+    });
     c.onDone(url, function (res) {
         console.log(res);
         var a = document.createElement('a');
@@ -837,58 +880,10 @@ function test() {
         // testFetch();
     });
 }
+test();
+// testFetch().then(() => {
 // test()
-test_fetch_1.testFetch().then(function () {
-    test();
-});
-
-
-/***/ }),
-
-/***/ "./src/test-fetch.ts":
-/*!***************************!*\
-  !*** ./src/test-fetch.ts ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * File: c:\Users\35327\Projects\ts-template\src\test-fetch.ts
- * Project: c:\Users\35327\Projects\ts-template
- * Created Date: Friday, August 3rd 2018, 2:37:56 pm
- * @author: liaodh
- * @summary: short description for the file
- * -----
- * Last Modified: Friday, August 3rd 2018, 2:46:44 pm
- * Modified By: liaodh
- * -----
- * Copyright (c) 2018 jiguang
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-function testFetch() {
-    var nameStart = 'markStart';
-    var nameEnd = 'markEnd';
-    var url = 'https://dadigua.oss-cn-shenzhen.aliyuncs.com/dd_3.4.8.exe';
-    window.performance.mark(nameStart);
-    return fetch(url).then(function (x) { return x.blob(); }).then(function (res) {
-        console.log(res);
-        var a = document.createElement('a');
-        var url = window.URL.createObjectURL(res);
-        var filename = 'dd_3.4.8.exe';
-        a.href = url;
-        a.download = filename;
-        a.click();
-        window.URL.revokeObjectURL(url);
-        window.performance.mark(nameEnd);
-        window.performance.measure('fetch', nameStart, nameEnd);
-        var measure = window.performance.getEntriesByName('fetch');
-        console.log(measure);
-        return res;
-    });
-}
-exports.testFetch = testFetch;
+// })
 
 
 /***/ })

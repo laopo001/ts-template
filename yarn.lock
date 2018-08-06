@@ -41,9 +41,9 @@
   version "17.2.0"
   resolved "https://registry.yarnpkg.com/@tweenjs/tween.js/-/tween.js-17.2.0.tgz#21f89b709bafc4b303adae7a83b4f35a0d9e4796"
 
-"@types/node@^10.0.3":
-  version "10.5.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.0.tgz#f5b61395c09b47ac46aaa1452750c9a72b3d3673"
+"@types/node@^10.5.6":
+  version "10.5.6"
+  resolved "https://registry.npmjs.org/@types/node/-/node-10.5.6.tgz#1640f021dd0eaf12e731e54198c12ad2e020dc8e"
 
 "@webassemblyjs/ast@1.5.12":
   version "1.5.12"

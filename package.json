@@ -49,6 +49,8 @@
     "@tweenjs/tween.js": "^17.2.0",
     "hypergl": "^0.0.1-beta.13",
     "isomorphic-fetch": "^2.2.1",
+    "proxy-agent": "^3.0.1",
+    "request": "^2.87.0",
     "whatwg-fetch": "^2.0.4"
   }
 }

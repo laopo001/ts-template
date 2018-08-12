@@ -5,15 +5,20 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Monday, August 6th 2018, 7:00:46 pm
+ * Last Modified: Monday, August 6th 2018, 10:11:42 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
-import '123.vert'
-import * as fetch from 'isomorphic-fetch';
+
+import * as http from 'http';
+import * as https from 'https';
 import * as fs from 'fs';
+import * as path from 'path';
+
+var ProxyAgent = require('proxy-agent');
+
 let tasks = [{
     'name': 'clang_format_win',
     'pattern': '.',
@@ -169,17 +174,105 @@ let tasks = [{
     ],
 }]
 
-let condition = 'host_os == "linux"'
 
-tasks = tasks.map(x => {
-    if (x.condition === condition || x.condition == null) {
-        return x;
+async function request(url) {
+    let arr = url.split('/');
+    let fileName = arr[arr.length - 1];
+    let filePath = path.resolve(__dirname, fileName)
+    console.log(fileName)
+    let firstResponse = await fetch(url)
+    let length = firstResponse.headers.get('content-length');
+    let buffer = await (firstResponse as any).buffer();
+    console.log(length)
+    console.log(buffer)
+    fs.writeFileSync(filePath, buffer);
+}
+var proxyUri = 'http://43.239.159.188:3456';
+console.log(proxyUri)
+async function main() {
+    // let buffer = await request('https://storage.googleapis.com/v8-wasm-spec-tests/b10929c46078b42ededd7d589d35fa1219874068');
+
+    // let condition = 'host_os == "linux"'
+
+    // tasks = tasks.map(x => {
+    //     if (x.condition === condition || x.condition == null) {
+    //         return x;
+    //     }
+    // }).filter(x => x != null);
+    // console.log(
+    //     tasks.length
+    // )
+    // tasks.forEach(async x => {
+    //     request(x.action[])
+
+    // })
+
+    var opts = {
+        method: 'GET',
+        host: 'dl.dadigua.com',
+        path: '/123.js',
+        // this is the important part!
+        // agent: new ProxyAgent(proxyUri)
+    };
+
+    // the rest works just like any other normal HTTP request
+    http.get(opts, onresponse).on('error', (e) => {
+        console.error(`错误: ${e.message}`);
+    });
+
+    function onresponse(res) {
+        const { statusCode } = res;
+        const contentType = res.headers['content-type'];
+
+        let error;
+        if (statusCode !== 200) {
+            error = new Error('请求失败。\n' +
+                `状态码: ${statusCode}`);
+        } else if (!/^application\/json/.test(contentType)) {
+            error = new Error('无效的 content-type.\n' +
+                `期望 application/json 但获取的是 ${contentType}`);
+        }
+        if (error) {
+            console.error(error.message);
+            // 消耗响应数据以释放内存
+            res.resume();
+            return;
+        }
+
+        res.setEncoding('utf8');
+        let rawData = '';
+        res.on('data', (chunk) => { rawData += chunk; });
+        res.on('end', () => {
+            try {
+                const parsedData = JSON.parse(rawData);
+                console.log(parsedData);
+            } catch (e) {
+                console.error(e.message);
+            }
+        });
     }
-}).filter(x => x != null);
-console.log(
-    tasks.length
-)
-tasks.forEach(async x => {
-    let buffer = await fetch('http://dl.dadigua.win/Chrome_320208401.apk').then(x => x.arrayBuffer())
 
-})
+}
+
+// main()
+
+
+
+// HTTP, HTTPS, or SOCKS proxy to use
+// var proxyUri = 'http://168.63.43.102:3128';
+
+var opts = {
+    method: 'GET',
+    host: 'baidu.com',
+    path: '/',
+    // this is the important part!
+    agent: new ProxyAgent(proxyUri)
+};
+
+// the rest works just like any other normal HTTP request
+http.get(opts, onresponse);
+
+function onresponse(res) {
+    console.log(res.statusCode, res.headers);
+    res.pipe(process.stdout);
+}

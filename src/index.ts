@@ -5,12 +5,20 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Tuesday, August 14th 2018, 11:10:52 am
+ * Last Modified: Wednesday, August 15th 2018, 10:42:38 am
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
+import { add } from "./a";
+
+fetch('../out/main.wasm').then(response =>
+    response.arrayBuffer()
+).then(bytes => WebAssembly.instantiate(bytes)).then(results => {
+    instance = results.instance;
+    document.getElementById("container").innerText = instance.exports.add_one(41);
+}).catch(console.error);
 type Fn<T=void> = (...args) => T
 type NullAble<T> = null | T;
 
@@ -20,6 +28,8 @@ let a: null | Fn
 // a = function (a) { console.log(123) }
 let b: NullAble<string>
 
-a=null;
+a = null;
 
 function q(z: string) { }
+
+add(1, 2)

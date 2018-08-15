@@ -86,13 +86,43 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/a.ts":
+/*!******************!*\
+  !*** ./src/a.ts ***!
+  \******************/
+/*! exports provided: add */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "add", function() { return add; });
+/**
+ * ProjectName: hypergl-demo
+ * FilePath: \src\a.ts
+ * Created Date: Wednesday, August 15th 2018, 10:26:39 am
+ * @author: liaodh
+ * @summary: short description for the file
+ * -----
+ * Last Modified: Wednesday, August 15th 2018, 10:27:09 am
+ * Modified By: liaodh
+ * -----
+ * Copyright (c) 2018 jiguang
+ */
+var add = function (a, b) { return a + b; };
+
+
+/***/ }),
+
 /***/ "./src/index.ts":
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./a */ "./src/a.ts");
 /**
  * File: c:\Users\35327\Githubs\ts-template\src\index.ts
  * Project: c:\Users\35327\Githubs\ts-template
@@ -100,12 +130,19 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, June 29th 2018, 12:01:28 am
+ * Last Modified: Wednesday, August 15th 2018, 10:27:41 am
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
+
 console.log(123);
+var a;
+// a = function (a) { console.log(123) }
+var b;
+a = null;
+function q(z) { }
+Object(_a__WEBPACK_IMPORTED_MODULE_0__["add"])(1, 2);
 
 
 /***/ })

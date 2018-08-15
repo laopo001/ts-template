@@ -79,6 +79,9 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// object with all WebAssembly.instance exports
+/******/ 	__webpack_require__.w = {};
+/******/
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.ts");
@@ -113,6 +116,27 @@ var add = function (a, b) { return a + b; };
 
 /***/ }),
 
+/***/ "./src/assets/main.wasm":
+/*!******************************!*\
+  !*** ./src/assets/main.wasm ***!
+  \******************************/
+/*! exports provided: memory, add_one */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Instantiate WebAssembly module
+var wasmExports = __webpack_require__.w[module.i];
+__webpack_require__.r(exports);
+// export exports from WebAssembly module
+for(var name in wasmExports) if(name != "__webpack_init__") exports[name] = wasmExports[name];
+// exec imports from WebAssembly module (for esm order)
+
+
+// exec wasm module
+wasmExports["__webpack_init__"]()
+
+/***/ }),
+
 /***/ "./src/index.ts":
 /*!**********************!*\
   !*** ./src/index.ts ***!
@@ -123,6 +147,7 @@ var add = function (a, b) { return a + b; };
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./a */ "./src/a.ts");
+/* harmony import */ var _assets_main_wasm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/main.wasm */ "./src/assets/main.wasm");
 /**
  * File: c:\Users\35327\Githubs\ts-template\src\index.ts
  * Project: c:\Users\35327\Githubs\ts-template
@@ -130,12 +155,14 @@ __webpack_require__.r(__webpack_exports__);
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Wednesday, August 15th 2018, 10:27:41 am
+ * Last Modified: Wednesday, August 15th 2018, 11:07:45 am
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
+
+console.log(_assets_main_wasm__WEBPACK_IMPORTED_MODULE_1__);
 console.log(123);
 var a;
 // a = function (a) { console.log(123) }

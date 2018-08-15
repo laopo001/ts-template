@@ -21,13 +21,11 @@
     ],
     "noImplicitAny": false,
     "typeRoots": [
-      "./node_modules/@types",
+      "node_modules/@types",
       "./typings"
     ],
     "outDir": "build/output",
-    "types": [
-      "webassembly-js-api"
-    ],
+    "types": [],
     "allowSyntheticDefaultImports": true
   },
   "files": [

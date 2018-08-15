@@ -5,20 +5,25 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Wednesday, August 15th 2018, 10:42:38 am
+ * Last Modified: Wednesday, August 15th 2018, 11:07:45 am
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
 import { add } from "./a";
+import * as e from "./assets/main.wasm";
+declare const WebAssembly;
 
-fetch('../out/main.wasm').then(response =>
-    response.arrayBuffer()
-).then(bytes => WebAssembly.instantiate(bytes)).then(results => {
-    instance = results.instance;
-    document.getElementById("container").innerText = instance.exports.add_one(41);
-}).catch(console.error);
+console.log(e)
+// fetch('./assets/main.wasm').then(response =>
+//     response.arrayBuffer()
+// ).then(bytes => WebAssembly.instantiate(bytes)).then(results => {
+//     let instance = results.instance;
+//     let innerText = instance.exports.add_one(41);
+//     console.log(innerText)
+//     export const a = 123;
+// }).catch(console.error);
 type Fn<T=void> = (...args) => T
 type NullAble<T> = null | T;
 

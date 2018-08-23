@@ -21,6 +21,7 @@
     "url": "https://github.com/playcanvas/engine.git"
   },
   "devDependencies": {
+    "@types/handlebars": "^4.0.39",
     "@types/node": "^10.0.3",
     "ali-oss": "^5.1.1",
     "browser-sync": "^2.18.12",
@@ -30,6 +31,7 @@
     "copy-webpack-plugin": "^4.5.1",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.6.1",
+    "handlebars": "^4.0.11",
     "jest": "^22.4.3",
     "minimist": "^1.2.0",
     "raw-loader": "^0.5.1",

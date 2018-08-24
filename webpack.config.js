@@ -31,7 +31,7 @@ module.exports = function (env, webpackConfig) {
             //加载器配置
             rules: [
                 {
-                    test: /\.tsx?$/,
+                    test: /\.(t|j)sx?$/,
                     use: [
                         'cache-loader',
                         {
@@ -53,17 +53,26 @@ module.exports = function (env, webpackConfig) {
                 {
                     test: /\.(frag|vert)$/,
                     use: 'raw-loader'
-                }
+                },
+                { test: /\.handlebars$/, loader: 'handlebars-loader' }
             ]
         },
         resolve: {
             extensions: ['.ts', '.tsx', '.js'],
             alias: {
+                'handlebars': 'handlebars/dist/handlebars.js'
             }
         },
-        externals: {
-
-        },
+        target: 'node',
+        // externals: [
+        //     'crypto-js',
+        //     'lodash.clonedeep',
+        //     'uuid',
+        //     'pako'
+        //     // nodeExternals({
+        //     //     whitelist: []
+        //     // })
+        // ],
         devtool: 'source-map',
         mode: 'development',
         performance: { hints: false }

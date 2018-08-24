@@ -1,0 +1,21 @@
+import request from '../util/request';
+import { {{#importList}}{{this}}, {{/importList}} } from './type';
+/**
+ * {{desc}}
+ */
+export class {{className}} {
+    {{#fnList}}
+    /**
+     * {{functonDesc}}
+     */
+    {{functonName}}(data: {
+        {{#parameterList}}
+        {{parameterName}}{{#unless required}}?{{/unless}}: {{parameterType}}, // {{parameterDesc}}
+        {{/parameterList}}
+    }): Promise<{{responseType}}> {
+        return request(`{{url}}`, {
+            method: '{{method}}',
+        }, data);
+    }
+    {{/fnList}}
+}

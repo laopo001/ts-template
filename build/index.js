@@ -79,6 +79,9 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// object with all WebAssembly.instance exports
+/******/ 	__webpack_require__.w = {};
+/******/
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.ts");
@@ -86,6 +89,56 @@
 /************************************************************************/
 /******/ ({
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/***/ "./src/a.ts":
+/*!******************!*\
+  !*** ./src/a.ts ***!
+  \******************/
+/*! exports provided: add */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "add", function() { return add; });
+/**
+ * ProjectName: hypergl-demo
+ * FilePath: \src\a.ts
+ * Created Date: Wednesday, August 15th 2018, 10:26:39 am
+ * @author: liaodh
+ * @summary: short description for the file
+ * -----
+ * Last Modified: Wednesday, August 15th 2018, 10:27:09 am
+ * Modified By: liaodh
+ * -----
+ * Copyright (c) 2018 jiguang
+ */
+var add = function (a, b) { return a + b; };
+
+
+/***/ }),
+
+/***/ "./src/assets/main.wasm":
+/*!******************************!*\
+  !*** ./src/assets/main.wasm ***!
+  \******************************/
+/*! exports provided: memory, add_one */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Instantiate WebAssembly module
+var wasmExports = __webpack_require__.w[module.i];
+__webpack_require__.r(exports);
+// export exports from WebAssembly module
+for(var name in wasmExports) if(name != "__webpack_init__") exports[name] = wasmExports[name];
+// exec imports from WebAssembly module (for esm order)
+
+
+// exec wasm module
+wasmExports["__webpack_init__"]()
+=======
+>>>>>>> 12582c99fbe2e4b00504313ce45ebdee8cc777a6
 /***/ "./node_modules/capnp-ts/lib/constants.js":
 /*!************************************************!*\
   !*** ./node_modules/capnp-ts/lib/constants.js ***!
@@ -6846,6 +6899,10 @@ var DateArr = /** @class */ (function (_super) {
 
 DateArr._Value = capnp_ts__WEBPACK_IMPORTED_MODULE_0__["CompositeList"](Date);
 
+<<<<<<< HEAD
+=======
+>>>>>>> e36e85a32dd462e17461c41719487de40d51ade3
+>>>>>>> 12582c99fbe2e4b00504313ce45ebdee8cc777a6
 
 /***/ }),
 
@@ -6853,15 +6910,34 @@ DateArr._Value = capnp_ts__WEBPACK_IMPORTED_MODULE_0__["CompositeList"](Date);
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
+<<<<<<< HEAD
 /*! exports provided: loadMessage */
+=======
+<<<<<<< HEAD
+/*! no exports provided */
+=======
+/*! exports provided: loadMessage */
+>>>>>>> e36e85a32dd462e17461c41719487de40d51ade3
+>>>>>>> 12582c99fbe2e4b00504313ce45ebdee8cc777a6
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./a */ "./src/a.ts");
+/* harmony import */ var _assets_main_wasm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/main.wasm */ "./src/assets/main.wasm");
+=======
+>>>>>>> 12582c99fbe2e4b00504313ce45ebdee8cc777a6
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadMessage", function() { return loadMessage; });
 /* harmony import */ var capnp_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! capnp-ts */ "./node_modules/capnp-ts/lib/index.js");
 /* harmony import */ var capnp_ts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(capnp_ts__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _date_capnp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./date.capnp */ "./src/date.capnp.ts");
+<<<<<<< HEAD
+=======
+>>>>>>> e36e85a32dd462e17461c41719487de40d51ade3
+>>>>>>> 12582c99fbe2e4b00504313ce45ebdee8cc777a6
 /**
  * File: c:\Users\35327\Githubs\ts-template\src\index.ts
  * Project: c:\Users\35327\Githubs\ts-template
@@ -6869,13 +6945,34 @@ __webpack_require__.r(__webpack_exports__);
  * @author: liaodh
  * @summary: short description for the file
  * -----
+<<<<<<< HEAD
  * Last Modified: Friday, June 29th 2018, 7:42:32 pm
+=======
+<<<<<<< HEAD
+ * Last Modified: Wednesday, August 15th 2018, 11:07:45 am
+=======
+ * Last Modified: Friday, June 29th 2018, 7:42:32 pm
+>>>>>>> e36e85a32dd462e17461c41719487de40d51ade3
+>>>>>>> 12582c99fbe2e4b00504313ce45ebdee8cc777a6
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+console.log(_assets_main_wasm__WEBPACK_IMPORTED_MODULE_1__);
+console.log(123);
+var a;
+// a = function (a) { console.log(123) }
+var b;
+a = null;
+function q(z) { }
+Object(_a__WEBPACK_IMPORTED_MODULE_0__["add"])(1, 2);
+=======
+>>>>>>> 12582c99fbe2e4b00504313ce45ebdee8cc777a6
 function loadMessage(buffer) {
     var message = new capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"](buffer);
     return message.getRoot(_date_capnp__WEBPACK_IMPORTED_MODULE_1__["Date"]);
@@ -6901,6 +6998,10 @@ console.log(arr.getValue().get(0).getYear());
 var q2 = arr.segment.message.toPackedArrayBuffer();
 var qq2 = new capnp_ts__WEBPACK_IMPORTED_MODULE_0__["Message"](q2);
 // console.log(qq2.getRoot(DateArr).getValue().get(0).getYear());
+<<<<<<< HEAD
+=======
+>>>>>>> e36e85a32dd462e17461c41719487de40d51ade3
+>>>>>>> 12582c99fbe2e4b00504313ce45ebdee8cc777a6
 
 
 /***/ })

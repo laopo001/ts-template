@@ -1,4 +1,4 @@
-import { request } from './request';
+import request from '../util/request';
 import { MsaRespdouble, MsaRespListCustomerChangeLogsVO, MsaResp, MsaRespListFinanceManageVO, MsaRespListChangeLogsVO,  } from './type';
 /**
  * 财务管理
@@ -20,9 +20,9 @@ export class FinanceController {
     getCustomersByCustomerIdFinanceLogs(data: {
         customerId: number, // customerId
         dateEnd?: string, // 结束日期，日期格式yyyy-MM-dd
-        dateEndValue?: string, // 
+        dateEndValue?: string, 
         dateStart?: string, // 开始日期，日期格式yyyy-MM-dd
-        dateStartValue?: string, // 
+        dateStartValue?: string, 
         operTypes?: string[], // 操作类型
         page?: number, // 页码，从1开始
         search?: string, // search
@@ -60,9 +60,9 @@ export class FinanceController {
      */
     getFinanceLogs(data: {
         dateEnd?: string, // 结束日期，日期格式yyyy-MM-dd
-        dateEndValue?: string, // 
+        dateEndValue?: string, 
         dateStart?: string, // 开始日期，日期格式yyyy-MM-dd
-        dateStartValue?: string, // 
+        dateStartValue?: string, 
         operTypes?: string[], // 操作类型
         page?: number, // 页码，从1开始
         search?: string, // search

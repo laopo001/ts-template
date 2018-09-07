@@ -5,7 +5,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, August 24th 2018, 7:06:11 pm
+ * Last Modified: Tuesday, August 28th 2018, 1:36:14 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -52,9 +52,17 @@ json.tags.forEach(tag => {
                         })
                     }
                 })
-                let ref = element.responses['200'].schema.$ref.replace('#/definitions/', '');
-                let responseType = ref.replace(/«|»/g, '');
-                temp.importList.add(responseType);
+                let responseType
+                if (element.responses['200'].schema.$ref != null) {
+                    let ref = element.responses['200'].schema.$ref.replace('#/definitions/', '');
+                    responseType = ref.replace(/«|»/g, '');
+                    temp.importList.add(responseType);
+                } else {
+                    responseType = 'any'
+                }
+                // let ref = element.responses['200'].schema.$ref.replace('#/definitions/', '');
+                // let responseType = ref.replace(/«|»/g, '');
+                // temp.importList.add(responseType);
                 temp.fnList.push({
                     functonName: `${key2}${key.replace(/{(\w+)}/g, (x, a) => {
 

@@ -10,7 +10,7 @@ export class {{className}} {
      */
     {{functonName}}(data: {
         {{#parameterList}}
-        {{parameterName}}{{#unless required}}?{{/unless}}: {{parameterType}}, {{#if parameterDesc}}// {{/if}}{{parameterDesc}}
+        {{parameterName}}{{#unless required}}?{{/unless}}: {{parameterType}},{{#if parameterDesc}} // {{/if}}{{parameterDesc}}
         {{/parameterList}}
     }): Promise<{{responseType}}> {
         return request(`{{url}}`, {

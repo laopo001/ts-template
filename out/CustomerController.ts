@@ -1,5 +1,5 @@
 import request from '../util/request';
-import { MsaRespListCustomerVO, MsaResp, MsaRespUserVO, MsaRespCustomerStaticsVO,  } from './type';
+import { MsaRespListCustomerVO, MsaResp, MsaRespUserVO, MsaRespCustomerStaticsVO, MsaRespEmailValidateInfo,  } from './type';
 /**
  * 客户管理
  */
@@ -45,6 +45,16 @@ export class CustomerController {
     getCustomersStatics(data: {
     }): Promise<MsaRespCustomerStaticsVO> {
         return request(`/customers/statics`, {
+            method: 'get',
+        }, data);
+    }
+    /**
+     * 根据邮箱搜索用户
+     */
+    getUsersSearch(data: {
+        email?: string, // 邮箱
+    }): Promise<MsaRespEmailValidateInfo> {
+        return request(`/users/search`, {
             method: 'get',
         }, data);
     }

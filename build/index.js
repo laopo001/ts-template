@@ -100,12 +100,27 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, June 29th 2018, 12:01:28 am
+ * Last Modified: Friday, September 7th 2018, 7:50:56 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
-console.log(123);
+function OBJ(jsobj) {
+    var p = new Proxy(jsobj, {
+        get: function (target, prop, receiver) {
+            return target[prop];
+        },
+        set: function (target, property, value, receiver) {
+            console.log('set');
+            return target;
+        }
+    });
+    return p;
+}
+var a = { name: 1 };
+var b = OBJ(a);
+var c = b.name = 7;
+console.log(c);
 
 
 /***/ })

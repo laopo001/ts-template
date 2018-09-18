@@ -1,7 +1,7 @@
 import request from '../util/request';
-import { MsaRespdouble, MsaRespListCustomerChangeLogsVO, MsaResp, MsaRespListFinanceManageVO, MsaRespListChangeLogsVO,  } from './type';
+import { MsaRespdouble, MsaResp, MsaRespListFinanceManageVO, MsaRespListChangeLogsVO,  } from './type';
 /**
- * 财务管理
+ * iportal财务管理
  */
 export class FinanceController {
     /**
@@ -11,24 +11,6 @@ export class FinanceController {
         customerId: number, // customerId
     }): Promise<MsaRespdouble> {
         return request(`/customers/${data.customerId}/finance/balance`, {
-            method: 'get',
-        }, data);
-    }
-    /**
-     * 查询客户财务记录
-     */
-    getCustomersByCustomerIdFinanceLogs(data: {
-        customerId: number, // customerId
-        dateEnd?: string, // 结束日期，日期格式yyyy-MM-dd
-        dateEndValue?: string, 
-        dateStart?: string, // 开始日期，日期格式yyyy-MM-dd
-        dateStartValue?: string, 
-        operTypes?: string[], // 操作类型
-        page?: number, // 页码，从1开始
-        search?: string, // search
-        size?: number, // 每页数量，默认10条
-    }): Promise<MsaRespListCustomerChangeLogsVO> {
-        return request(`/customers/${data.customerId}/finance/logs`, {
             method: 'get',
         }, data);
     }
@@ -60,9 +42,9 @@ export class FinanceController {
      */
     getFinanceLogs(data: {
         dateEnd?: string, // 结束日期，日期格式yyyy-MM-dd
-        dateEndValue?: string, 
+        dateEndValue?: string,
         dateStart?: string, // 开始日期，日期格式yyyy-MM-dd
-        dateStartValue?: string, 
+        dateStartValue?: string,
         operTypes?: string[], // 操作类型
         page?: number, // 页码，从1开始
         search?: string, // search

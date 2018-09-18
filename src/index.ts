@@ -5,7 +5,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Tuesday, August 28th 2018, 1:36:14 pm
+ * Last Modified: Tuesday, September 18th 2018, 3:00:59 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -30,6 +30,7 @@ json.tags.forEach(tag => {
     let temp: any = {};
     temp.desc = tag.description;
     temp.className = tag.name.split('-').map(x => x.slice(0, 1).toUpperCase() + x.slice(1)).join('')
+    temp.fileName = tag.name.split('-')[0]+'.service'
     temp.fnList = [];
     temp.importList = new Set();
     for (const key in json.paths) {
@@ -44,8 +45,9 @@ json.tags.forEach(tag => {
                         if (type === 'array') {
                             type = item.items.type + '[]'
                         }
+                        let name = item.name.indexOf('.') > -1 ? item.name.split('.').join('') : item.name
                         parameters.push({
-                            parameterName: item.name,
+                            parameterName: name,
                             parameterType: type,
                             parameterDesc: item.description,
                             required: item.required,
@@ -136,7 +138,7 @@ if (!fs.existsSync(path.resolve(process.cwd(), src))) {
     fs.mkdirSync(src);
 }
 res.forEach(x => {
-    fs.writeFileSync(path.resolve(process.cwd(), src, x.className + '.ts'), tt(x), 'utf8')
+    fs.writeFileSync(path.resolve(process.cwd(), src, x.fileName + '.ts'), tt(x), 'utf8')
 })
 
 

@@ -171,11 +171,11 @@ export class DeveloperClient {
      * changeProfile
      */
     postDevChangeProfile(data: {
-        companyName?: string, 
-        contacter?: string, 
+        companyName?: string,
+        contacter?: string,
         id: number, // id
-        mobile?: string, 
-        qq?: string, 
+        mobile?: string,
+        qq?: string,
     }): Promise<APIResult> {
         return request(`/dev/changeProfile`, {
             method: 'post',
@@ -185,11 +185,11 @@ export class DeveloperClient {
      * changePwd
      */
     postDevChangePwd(data: {
-        cfmpassword?: string, 
+        cfmpassword?: string,
         id: number, // id
-        newpassword?: string, 
-        password?: string, 
-        vcode?: string, 
+        newpassword?: string,
+        password?: string,
+        vcode?: string,
     }): Promise<APIResult> {
         return request(`/dev/changePwd`, {
             method: 'post',
@@ -199,10 +199,10 @@ export class DeveloperClient {
      * changePwdNew
      */
     postDevChangePwdNew(data: {
-        devId?: number, 
-        newpassword?: string, 
-        password?: string, 
-        token?: string, 
+        devId?: number,
+        newpassword?: string,
+        password?: string,
+        token?: string,
     }): Promise<APIResult> {
         return request(`/dev/changePwdNew`, {
             method: 'post',
@@ -630,16 +630,16 @@ export class DeveloperClient {
      * register
      */
     postDevRegister(data: {
-        companyName?: string, 
-        contacter?: string, 
-        email?: string, 
-        forceLogin?: number, 
-        from?: string, 
-        ip?: string, 
-        mobile?: string, 
-        password?: string, 
-        qq?: string, 
-        userName?: string, 
+        companyName?: string,
+        contacter?: string,
+        email?: string,
+        forceLogin?: number,
+        from?: string,
+        ip?: string,
+        mobile?: string,
+        password?: string,
+        qq?: string,
+        userName?: string,
     }): Promise<Developer> {
         return request(`/dev/register`, {
             method: 'post',
@@ -749,44 +749,49 @@ export class DeveloperClient {
      * updateDeveloper
      */
     postDevUpdateDeveloper(data: {
-        clientStatus?: string, 
-        companyName?: string, 
-        conferSure?: number, 
-        config?: string, 
-        contacter?: string, 
-        devAuthCompanyName?: string, 
-        devAuthEmail?: string, 
-        devAuthName?: string, 
-        devAuthPhoneNum?: string, 
-        devKey?: string, 
-        devSecret?: string, 
-        email?: string, 
-        emailCode?: string, 
-        emailFlag?: number, 
-        forceType?: number, 
-        id?: number, 
-        ipAddress?: string, 
-        isActivation?: number, 
-        isEnabled?: number, 
-        lastUpdateTime?: string, 
-        lastVisitPlatform?: string, 
-        loginInfo?: string, 
-        loginToken?: string, 
-        loginTokenTime?: string, 
-        loginType?: string, 
-        loginValue?: string, 
-        loginVerify?: number, 
-        mobile?: string, 
-        parentId?: number, 
-        parentOrCurrentId?: number, 
-        password?: string, 
-        payRate?: number, 
-        prov?: string, 
-        qq?: string, 
-        regDate?: string, 
-        registerSource?: string, 
-        username?: string, 
-        verifyPhone?: string, 
+        clientStatus?: string,
+        companyName?: string,
+        conferSure?: number,
+        config?: string,
+        configObjectapi_adminenabled?: boolean,
+        configObjectapi_adminlimit?: number,
+        configObjectexchangeenabled?: boolean,
+        configObjectpush_configenabled?: boolean,
+        configObjectsegmentenabled?: boolean,
+        contacter?: string,
+        devAuthCompanyName?: string,
+        devAuthEmail?: string,
+        devAuthName?: string,
+        devAuthPhoneNum?: string,
+        devKey?: string,
+        devSecret?: string,
+        email?: string,
+        emailCode?: string,
+        emailFlag?: number,
+        forceType?: number,
+        id?: number,
+        ipAddress?: string,
+        isActivation?: number,
+        isEnabled?: number,
+        lastUpdateTime?: string,
+        lastVisitPlatform?: string,
+        loginInfo?: string,
+        loginToken?: string,
+        loginTokenTime?: string,
+        loginType?: string,
+        loginValue?: string,
+        loginVerify?: number,
+        mobile?: string,
+        parentId?: number,
+        parentOrCurrentId?: number,
+        password?: string,
+        payRate?: number,
+        prov?: string,
+        qq?: string,
+        regDate?: string,
+        registerSource?: string,
+        username?: string,
+        verifyPhone?: string,
     }): Promise<any> {
         return request(`/dev/updateDeveloper`, {
             method: 'post',

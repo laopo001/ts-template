@@ -1,7 +1,7 @@
 import request from '../util/request';
-import { MsaRespListCustomerVO, MsaResp, MsaRespUserVO, MsaRespCustomerStaticsVO, MsaRespEmailValidateInfo,  } from './type';
+import { MsaRespListCustomerVO, MsaResp, MsaRespCustomerStaticsVO, MsaRespEmailValidateInfo,  } from './type';
 /**
- * 客户管理
+ * iportal客户管理
  */
 export class CustomerController {
     /**
@@ -9,9 +9,9 @@ export class CustomerController {
      */
     getCustomers(data: {
         dateEnd?: string, // 结束日期，日期格式yyyy-MM-dd
-        dateEndValue?: string, 
+        dateEndValue?: string,
         dateStart?: string, // 开始日期，日期格式yyyy-MM-dd
-        dateStartValue?: string, 
+        dateStartValue?: string,
         page?: number, // 页码，从1开始
         search?: string, // 搜索内容
         size?: number, // 每页数量，默认10条
@@ -28,15 +28,6 @@ export class CustomerController {
     }): Promise<MsaResp> {
         return request(`/customers`, {
             method: 'post',
-        }, data);
-    }
-    /**
-     * 查询客户信息
-     */
-    getCustomersInfo(data: {
-    }): Promise<MsaRespUserVO> {
-        return request(`/customers/info`, {
-            method: 'get',
         }, data);
     }
     /**

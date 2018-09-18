@@ -45,27 +45,6 @@ export interface ChangeLogsVO {
     operateTime: Timestamp; // 操作日期
     remark: string; // 备注
 }
-export interface ClueStaticsVO {
-    allAdded: number; // 累计添加
-    todayAdded: number; // 今日添加
-}
-export interface ClueVO {
-    createTime: Timestamp; // 推送时间
-    id: number; // 
-    intent: string; // 意向品牌
-    mobile: string; // 手机号
-    name: string; // 姓名
-    price: number; // 线索价格
-    section: string; // 预算区间
-}
-export interface CustomerChangeLogsVO {
-    amount: number; // 金额
-    customerId: number; // 客户ID
-    id: number; // ID
-    operType: string; // 操作类型
-    operateTime: Timestamp; // 日期
-    remark: string; // 备注
-}
 export interface CustomerForm {
     address: string; // 详细地址
     area: string; // 区
@@ -73,6 +52,8 @@ export interface CustomerForm {
     email: string; // 联系人邮箱
     name: string; // 客户名称
     province: string; // 省
+    uid: number; // uid
+    username: string; // 用户名
 }
 export interface CustomerStaticsVO {
     allAdded: number; // 累计添加
@@ -182,13 +163,6 @@ export interface MsaResp {
     ok: boolean; // 
     pageData: PageData; // 
 }
-export interface MsaRespClueStaticsVO {
-    code: number; // 
-    data: ClueStaticsVO; // 
-    message: string; // 
-    ok: boolean; // 
-    pageData: PageData; // 
-}
 export interface MsaRespCustomerStaticsVO {
     code: number; // 
     data: CustomerStaticsVO; // 
@@ -210,20 +184,6 @@ export interface MsaRespListChangeLogsVO {
     ok: boolean; // 
     pageData: PageData; // 
 }
-export interface MsaRespListClueVO {
-    code: number; // 
-    data: ClueVO[]; // 
-    message: string; // 
-    ok: boolean; // 
-    pageData: PageData; // 
-}
-export interface MsaRespListCustomerChangeLogsVO {
-    code: number; // 
-    data: CustomerChangeLogsVO[]; // 
-    message: string; // 
-    ok: boolean; // 
-    pageData: PageData; // 
-}
 export interface MsaRespListCustomerVO {
     code: number; // 
     data: CustomerVO[]; // 
@@ -238,20 +198,6 @@ export interface MsaRespListFinanceManageVO {
     ok: boolean; // 
     pageData: PageData; // 
 }
-export interface MsaRespSMSResult {
-    code: number; // 
-    data: SMSResult; // 
-    message: string; // 
-    ok: boolean; // 
-    pageData: PageData; // 
-}
-export interface MsaRespUserVO {
-    code: number; // 
-    data: UserVO; // 
-    message: string; // 
-    ok: boolean; // 
-    pageData: PageData; // 
-}
 export interface MsaRespdouble {
     code: number; // 
     data: number; // 
@@ -259,17 +205,12 @@ export interface MsaRespdouble {
     ok: boolean; // 
     pageData: PageData; // 
 }
-export interface OrderForm {
-    area: string; // 区
-    city: string; // 城市
-    intent: string; // 意向品牌
-    ip: string; // 
-    mobile: string; // 手机号码
-    msgId: string; // 短信ID
-    name: string; // 客户名称
-    origin: string; // 来源
-    section: string; // 价格区间
-    verifyCode: string; // 验证码
+export interface MsaRespobject {
+    code: number; // 
+    data: object; // 
+    message: string; // 
+    ok: boolean; // 
+    pageData: PageData; // 
 }
 export interface PageData {
     totalNumber: number; // 
@@ -284,11 +225,6 @@ export interface Permission {
     izone: number; // 
     push: number; // 
     sms: number; // 
-}
-export interface SMSResult {
-    code: number; // 
-    error: string; // 
-    msg_id: string; // 
 }
 export interface SubUserRegisterForm {
     contacter: string; // 
@@ -326,30 +262,4 @@ export interface UserInfo {
     dev: Developer; // 
     isSubUser: boolean; // 
     unreadCount: number; // 
-}
-export interface UserVO {
-    accountType: number; // 
-    advertiserNum: string; // 
-    checkInfo: string; // 
-    checkStatus: string; // 
-    companyId: number; // 
-    companyName: string; // 
-    createTime: string; // 
-    cuid: number; // 
-    customerId: number; // 客户ID
-    devKey: string; // 
-    devSecret: string; // 
-    email: string; // 
-    isAdUser: boolean; // 
-    loginVerify: number; // 
-    mobile: string; // 
-    modifyTime: string; // 
-    observer: number; // 
-    qq: string; // 
-    realName: string; // 
-    roleId: number; // 
-    status: number; // 
-    ticketId: string; // 
-    uid: number; // 
-    username: string; // 
 }

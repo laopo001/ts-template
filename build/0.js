@@ -66,16 +66,15 @@ wasmExports["__webpack_init__"]()
 
 /***/ }),
 
-/***/ "./src/index.js":
+/***/ "./src/index.ts":
 /*!**********************!*\
-  !*** ./src/index.js ***!
+  !*** ./src/index.ts ***!
   \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var rust_npm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rust-npm */ "../../RProjects/rust-npm/pkg/rust_npm.js");
+
 /**
  * File: c:\Users\35327\Githubs\ts-template\src\index.ts
  * Project: c:\Users\35327\Githubs\ts-template
@@ -88,10 +87,11 @@ __webpack_require__.r(__webpack_exports__);
  * -----
  * Copyright (c) 2018 jiguang
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+var wasm = __webpack_require__(/*! rust-npm */ "../../RProjects/rust-npm/pkg/rust_npm.js");
+wasm.greet();
+console.log(123);
 
-
-rust_npm__WEBPACK_IMPORTED_MODULE_0__["greet"]();
-console.log(123)
 
 /***/ })
 

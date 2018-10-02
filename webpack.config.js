@@ -3,11 +3,11 @@ var path = require('path')
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = function (env, webpackConfig) {
-    console.log(`./src/index`)
-    return {
+    let webpackDevServer = webpackConfig.$0.endsWith('webpack-dev-server');
+    let res = {
         //页面入口文件配置
         entry: {
-            index: `./src/index`
+            index: `./src/bootstrap`
         },
         //入口文件输出配置
         output: {
@@ -57,7 +57,7 @@ module.exports = function (env, webpackConfig) {
             ]
         },
         resolve: {
-            extensions: ['.ts', '.tsx', '.js'],
+            extensions: ['.ts', '.tsx', '.js', '.wasm'],
             alias: {
             }
         },
@@ -66,6 +66,15 @@ module.exports = function (env, webpackConfig) {
         },
         devtool: 'source-map',
         mode: 'development',
-        performance: { hints: false }
+        performance: { hints: false },
+        devServer: {
+            contentBase: path.join(__dirname, 'build'),
+            // compress: true,
+            port: 8080
+        }
     };
+    if(webpackDevServer){
+        res.plugins.shift()
+    }
+    return res;
 }

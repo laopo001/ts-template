@@ -1,5 +1,5 @@
 import request from '../util/request';
-import { APIResult, AppSearchResult, Developer, DevAuth, UserInfo,  } from './type';
+import { APIResult, AppSearchResult, Developer, DevAuth, UserConfig, UserInfo,  } from './type';
 /**
  * Developer Client
  */
@@ -8,6 +8,11 @@ export class DeveloperClient {
      * addSubUser
      */
     postDevAddSubUser(data: {
+        contacter: string,
+        email: string,
+        parentId: number,
+        password: string,
+        username: string,
     }): Promise<APIResult> {
         return request(`/dev/addSubUser`, {
             method: 'post',
@@ -222,6 +227,15 @@ export class DeveloperClient {
      * countDevAuth
      */
     postDevCountDevAuthParam(data: {
+        devId: number,
+        devName: string,
+        devType: number,
+        endTime: string,
+        pageIndex: number,
+        pageSize: number,
+        phoneNum: string,
+        startTime: string,
+        status: number,
     }): Promise<any> {
         return request(`/dev/countDevAuthParam`, {
             method: 'post',
@@ -571,6 +585,25 @@ export class DeveloperClient {
      * insertDevAuth
      */
     postDevInsertDevAuth(data: {
+        auditUserName: string,
+        certificateType: string,
+        createDate: string,
+        devId: string,
+        devName: string,
+        devType: number,
+        email: string,
+        id: number,
+        idBackImg: string,
+        idFaceImg: string,
+        idHandImg: string,
+        idNum: string,
+        licenceImg: string,
+        phoneNum: string,
+        realName: string,
+        refuseReason: string,
+        remark: string,
+        sessionId: string,
+        status: number,
     }): Promise<any> {
         return request(`/dev/insertDevAuth`, {
             method: 'post',
@@ -591,6 +624,15 @@ export class DeveloperClient {
      * listDevAuthPage
      */
     postDevListDevAuthPage(data: {
+        devId: number,
+        devName: string,
+        devType: number,
+        endTime: string,
+        pageIndex: number,
+        pageSize: number,
+        phoneNum: string,
+        startTime: string,
+        status: number,
     }): Promise<any> {
         return request(`/dev/listDevAuthPage`, {
             method: 'post',
@@ -611,6 +653,14 @@ export class DeveloperClient {
      * updateDevPermission
      */
     postDevPermissionUpdate(data: {
+        ad: number,
+        antiFraud: number,
+        devId: number,
+        iapp: number,
+        im: number,
+        izone: number,
+        push: number,
+        sms: number,
     }): Promise<any> {
         return request(`/dev/permission/update`, {
             method: 'post',
@@ -729,6 +779,25 @@ export class DeveloperClient {
      * updateDevAuth
      */
     postDevUpdateDevAuth(data: {
+        auditUserName: string,
+        certificateType: string,
+        createDate: string,
+        devId: string,
+        devName: string,
+        devType: number,
+        email: string,
+        id: number,
+        idBackImg: string,
+        idFaceImg: string,
+        idHandImg: string,
+        idNum: string,
+        licenceImg: string,
+        phoneNum: string,
+        realName: string,
+        refuseReason: string,
+        remark: string,
+        sessionId: string,
+        status: number,
     }): Promise<any> {
         return request(`/dev/updateDevAuth`, {
             method: 'post',
@@ -802,6 +871,43 @@ export class DeveloperClient {
      */
     postDevUpdateDeveloperWithSource(data: {
         fromIportal: boolean, // fromIportal
+        clientStatus: string,
+        companyName: string,
+        conferSure: number,
+        configObject: UserConfig,
+        contacter: string,
+        devAuthCompanyName: string,
+        devAuthEmail: string,
+        devAuthName: string,
+        devAuthPhoneNum: string,
+        devKey: string,
+        devSecret: string,
+        email: string,
+        emailCode: string,
+        emailFlag: number,
+        forceType: number,
+        id: number,
+        ipAddress: string,
+        isActivation: number,
+        isEnabled: number,
+        lastUpdateTime: string,
+        lastVisitPlatform: string,
+        loginInfo: string,
+        loginToken: string,
+        loginTokenTime: string,
+        loginType: string,
+        loginValue: string,
+        loginVerify: number,
+        mobile: string,
+        parentId: number,
+        password: string,
+        payRate: number,
+        prov: string,
+        qq: string,
+        regDate: string,
+        registerSource: string,
+        username: string,
+        verifyPhone: string,
     }): Promise<any> {
         return request(`/dev/updateDeveloperWithSource`, {
             method: 'post',

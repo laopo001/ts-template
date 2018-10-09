@@ -5,7 +5,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Tuesday, September 18th 2018, 3:00:59 pm
+ * Last Modified: Tuesday, October 9th 2018, 12:34:21 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -21,16 +21,56 @@ const tt = require('./hbsTemplates/t.ts.handlebars');
 const typet = require('./hbsTemplates/type.ts.handlebars');
 const src = 'out'
 
+
 const typeMap = {
     integer: 'number'
 }
+
+let typeList = [];
+
+for (const key in json.definitions) {
+    let obj = json.definitions[key];
+    let temp: any = {};
+    temp.title = obj.title.replace(/«|»/g, '')
+    temp.objList = [];
+    typeList.push(temp)
+
+    for (const key2 in obj.properties) {
+        const element = obj.properties[key2];
+        if (element.$ref) {
+            let ref = element.$ref
+            temp.objList.push({
+                keyName: key2,
+                keyType: ref.split('/')[ref.split('/').length - 1],
+                keyDesc: element.description,
+            })
+        } else {
+
+            if (element.type === 'array') {
+                let ref = element.items.$ref
+                temp.objList.push({
+                    keyName: key2,
+                    keyType: ref.split('/')[ref.split('/').length - 1] + '[]',
+                    keyDesc: element.description,
+                })
+            } else {
+                temp.objList.push({
+                    keyName: key2,
+                    keyType: typeMap[element.type] || element.type,
+                    keyDesc: element.description,
+                })
+            }
+        }
+    }
+}
+
 
 let res = [];
 json.tags.forEach(tag => {
     let temp: any = {};
     temp.desc = tag.description;
     temp.className = tag.name.split('-').map(x => x.slice(0, 1).toUpperCase() + x.slice(1)).join('')
-    temp.fileName = tag.name.split('-')[0]+'.service'
+    temp.fileName = tag.name.split('-')[0] + '.service'
     temp.fnList = [];
     temp.importList = new Set();
     for (const key in json.paths) {
@@ -52,6 +92,36 @@ json.tags.forEach(tag => {
                             parameterDesc: item.description,
                             required: item.required,
                         })
+                    } else if (item.in === 'body') {
+                        // console.log(item)
+                        let type;
+                        if (item.schema.$ref) {
+                            type = item.schema.$ref.replace('#/definitions/', '');
+                            let q = typeList.find(x => x.title === type)
+                            // console.log(q);
+                            q.objList.forEach(item2 => {
+                                if (item2.keyType !== (item2.keyType as string).toLocaleLowerCase()) {
+                                    temp.importList.add(item2.keyType);
+                                }
+                                parameters.push({
+                                    parameterName: item2.keyName,
+                                    parameterType: item2.keyType,
+                                    parameterDesc: item2.keyDesc,
+                                    required: true,
+                                })
+                            })
+
+                            // temp.importList.add(type);
+                        } else {
+                            type = typeMap[item.schema.type] || item.type;
+                            let name = item.name.indexOf('.') > -1 ? item.name.split('.').join('') : item.name
+                            parameters.push({
+                                parameterName: name,
+                                parameterType: type,
+                                parameterDesc: item.description,
+                                required: item.required,
+                            })
+                        }
                     }
                 })
                 let responseType
@@ -94,43 +164,6 @@ console.log(
 
 
 
-let typeList = [];
-
-for (const key in json.definitions) {
-    let obj = json.definitions[key];
-    let temp: any = {};
-    temp.title = obj.title.replace(/«|»/g, '')
-    temp.objList = [];
-    typeList.push(temp)
-
-    for (const key2 in obj.properties) {
-        const element = obj.properties[key2];
-        if (element.$ref) {
-            let ref = element.$ref
-            temp.objList.push({
-                keyName: key2,
-                keyType: ref.split('/')[ref.split('/').length - 1],
-                keyDesc: element.description,
-            })
-        } else {
-
-            if (element.type === 'array') {
-                let ref = element.items.$ref
-                temp.objList.push({
-                    keyName: key2,
-                    keyType: ref.split('/')[ref.split('/').length - 1] + '[]',
-                    keyDesc: element.description,
-                })
-            } else {
-                temp.objList.push({
-                    keyName: key2,
-                    keyType: typeMap[element.type] || element.type,
-                    keyDesc: element.description,
-                })
-            }
-        }
-    }
-}
 
 
 

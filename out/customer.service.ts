@@ -1,5 +1,5 @@
 import request from '../util/request';
-import { MsaRespListCustomerVO, MsaResp, MsaRespCustomerStaticsVO, MsaRespEmailValidateInfo,  } from './type';
+import { MsaRespListCustomerVO, MsaResp, MsaRespCustomerStaticsVO, MsaRespCustomerVO, MsaRespEmailValidateInfo,  } from './type';
 /**
  * iportal客户管理
  */
@@ -25,6 +25,14 @@ export class CustomerController {
      * 创建客户
      */
     postCustomers(data: {
+        address: string, // 详细地址
+        area: string, // 区
+        city: string, // 市
+        email: string, // 联系人邮箱
+        name: string, // 客户名称
+        province: string, // 省
+        uid: number, // uid
+        username: string, // 用户名
     }): Promise<MsaResp> {
         return request(`/customers`, {
             method: 'post',
@@ -37,6 +45,34 @@ export class CustomerController {
     }): Promise<MsaRespCustomerStaticsVO> {
         return request(`/customers/statics`, {
             method: 'get',
+        }, data);
+    }
+    /**
+     * 查询客户信息
+     */
+    getCustomersById(data: {
+        id: number, // id
+    }): Promise<MsaRespCustomerVO> {
+        return request(`/customers/${data.id}`, {
+            method: 'get',
+        }, data);
+    }
+    /**
+     * 更新客户信息
+     */
+    putCustomersById(data: {
+        address: string, // 详细地址
+        area: string, // 区
+        city: string, // 市
+        email: string, // 联系人邮箱
+        name: string, // 客户名称
+        province: string, // 省
+        uid: number, // uid
+        username: string, // 用户名
+        id: number, // id
+    }): Promise<MsaResp> {
+        return request(`/customers/${data.id}`, {
+            method: 'put',
         }, data);
     }
     /**

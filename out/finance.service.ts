@@ -19,6 +19,8 @@ export class FinanceController {
      */
     postCustomersByCustomerIdFinanceTransfer(data: {
         customerId: number, // customerId
+        amount: number, // 转账金额，单位：元
+        operType: string, // 操作类型
         uid?: number, // uid
     }): Promise<MsaResp> {
         return request(`/customers/${data.customerId}/finance/transfer`, {

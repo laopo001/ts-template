@@ -7,10 +7,10 @@ export class FilesImportController {
     /**
      * 获取私有下载链接
      */
-    getDownloadUrlByUrl(data: {
+    getDownloadUrl(data: {
         url: string, // url
     }): Promise<MsaRespobject> {
-        return request(`/downloadUrl/${data.url}`, {
+        return request(`/downloadUrl`, {
             method: 'get',
         }, data);
     }
@@ -30,6 +30,8 @@ export class FilesImportController {
      * 导入线索文件
      */
     postLeadsFiles(data: {
+        url: string, // 文件链接
+        uid?: number, // uid
     }): Promise<MsaResp> {
         return request(`/leads/files`, {
             method: 'post',
@@ -40,6 +42,7 @@ export class FilesImportController {
      */
     deleteLeadsFilesById(data: {
         id: number, // id
+        uid?: number, // uid
     }): Promise<MsaResp> {
         return request(`/leads/files/${data.id}`, {
             method: 'delete',
@@ -49,6 +52,7 @@ export class FilesImportController {
      * 获取七牛上传链接和token
      */
     getQiniuUpload(data: {
+        encrypt?: boolean, // encrypt
     }): Promise<MsaRespobject> {
         return request(`/qiniu/upload`, {
             method: 'get',

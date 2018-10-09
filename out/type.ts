@@ -170,6 +170,13 @@ export interface MsaRespCustomerStaticsVO {
     ok: boolean; // 
     pageData: PageData; // 
 }
+export interface MsaRespCustomerVO {
+    code: number; // 
+    data: CustomerVO; // 
+    message: string; // 
+    ok: boolean; // 
+    pageData: PageData; // 
+}
 export interface MsaRespEmailValidateInfo {
     code: number; // 
     data: EmailValidateInfo; // 

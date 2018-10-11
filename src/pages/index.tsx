@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Button } from 'antd';
 import { connect } from 'dva';
 export class TestError extends React.Component {
     componentDidCatch(e) {
@@ -8,7 +9,7 @@ export class TestError extends React.Component {
         // throw new Error('a');
     }
     render() {
-        return <div>TestError</div>
+        return <Button>TestError</Button>
     }
 }
 

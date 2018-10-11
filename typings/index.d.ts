@@ -1,13 +1,15 @@
-declare module '*.frag' {
-    const content: any;
-    export default content;
-}
+// declare module '*.frag' {
+//     const content: any;
+//     export default content;
+// }
 
-declare module '*.vert' {
-    const content: any;
-    export default content;
-}
+// declare module '*.vert' {
+//     const content: any;
+//     export default content;
+// }
 
+declare module '*.less'
+declare module '*.css'
 declare module '*.svg'
 declare module '*.png'
 declare module '*.jpg'

@@ -16,7 +16,7 @@ import { App } from './pages/index';
 import { Router, Route } from 'dva/router';
 
 
-export function RouterConfig({ history }) {
+export function routerConfig({ history }) {
     return (
       <Router history={history}>
         <Route path="/" component={App} />

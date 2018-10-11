@@ -50,14 +50,33 @@ module.exports = function (env, webpackConfig) {
                         }
                     ]
                 },
+                // {
+                //     test: /\.(frag|vert)$/,
+                //     use: 'raw-loader'
+                // },
                 {
-                    test: /\.(frag|vert)$/,
-                    use: 'raw-loader'
+                    test: /\.less$/,
+                    use: [{
+                        loader: 'style-loader',
+                    }, {
+                        loader: 'css-loader', // translates CSS into CommonJS
+                    }, {
+                        loader: 'less-loader', // compiles Less to CSS
+                        options: {
+                            // modifyVars: {
+                            //     'base-color': '#f9963f',
+                            //     'primary-color': '#1DA57A',
+                            //     'link-color': '#1DA57A',
+                            //     'border-radius-base': '2px',
+                            // },
+                            javascriptEnabled: true,
+                        },
+                    }],
                 }
             ]
         },
         resolve: {
-            extensions: ['.ts', '.tsx', '.js', '.wasm'],
+            extensions: ['.ts', '.tsx', '.js', '.wasm', '.less', '.css'],
             alias: {
             }
         },
@@ -73,7 +92,7 @@ module.exports = function (env, webpackConfig) {
             port: 8080
         }
     };
-    if(webpackDevServer){
+    if (webpackDevServer) {
         res.plugins.shift()
     }
     return res;

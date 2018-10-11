@@ -1,19 +1,13 @@
-// import * as React from 'react';
+
 import dva from 'dva';
 import { count } from './models'
-import { RouterConfig } from './router';
+import { routerConfig } from './router';
+import './style'
 
-// 1. Initialize
 const app = dva();
 
-
-// 2. Model
 app.model(count);
 
+app.router(routerConfig as any);
 
-
-// 4. Router
-app.router(RouterConfig as any);
-
-// 5. Start
 app.start('#root');

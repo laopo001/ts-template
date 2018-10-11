@@ -1,15 +1,12 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "jsx": "react",
-    "jsxFactory": "hpc.h",
+    "jsxFactory": "React.createElement",
     "lib": [
       "webworker",
       "dom",
@@ -19,23 +16,30 @@
       "es2018",
       "esnext"
     ],
-    "noImplicitAny": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "importHelpers": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "outDir": "build/output",
+    "sourceMap": true,
+    "target": "es5",
     "typeRoots": [
       "./node_modules/@types",
       "./typings"
     ],
-    "outDir": "build/output",
-    "types": [
-    ],
-    "allowSyntheticDefaultImports": true
+    "types": []
   },
-  "files": [
-    "src/**/*"
-  ],
-  "include": [
-    "src","typings"
-  ],
   "exclude": [
     "node_modules"
+  ],
+  "include": [
+    "src",
+    "typings"
   ]
 }

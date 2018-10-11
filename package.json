@@ -45,6 +45,7 @@
   "dependencies": {
     "@types/react": "^16.4.16",
     "@types/react-dom": "^16.0.9",
+    "dva": "^2.4.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "whatwg-fetch": "^2.0.4"

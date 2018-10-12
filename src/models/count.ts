@@ -5,18 +5,25 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Thursday, October 11th 2018, 5:06:30 pm
+ * Last Modified: Friday, October 12th 2018, 1:59:20 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
+export interface CountProps {
+    count: number
+}
 
 export const count = {
     namespace: 'count',
     state: 0,
     reducers: {
-        add(count) { return count + 1 },
-        minus(count) { return count - 1 },
+        add(count) {
+            return count + 1;
+        },
+        minus(count) {
+            return count - 1;
+        },
     },
-}
+};

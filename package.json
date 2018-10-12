@@ -35,15 +35,18 @@
     "thread-loader": "^1.1.5",
     "ts-loader": "^4.2.0",
     "ts-node": "^7.0.0",
+    "tslint": "^5.11.0",
     "typescript": "^2.8.0-insiders.20180127",
     "webpack": "4.20.2",
     "webpack-cli": "3.1.0",
-    "webpack-dev-server": "3.1.5"
+    "webpack-dev-server": "3.1.5",
+    "webpack-merge": "^4.1.4"
   },
   "scripts": {
     "start": "webpack --colors --watch",
     "server": "webpack-dev-server",
-    "build": "webpack --colors"
+    "build": "webpack --colors",
+    "build:test" : "webpack --env.test"
   },
   "engines": {
     "node": ">= 0.6.12"

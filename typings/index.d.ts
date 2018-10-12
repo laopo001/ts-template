@@ -8,6 +8,7 @@
 //     export default content;
 // }
 
+declare module 'environment'
 declare module '*.less'
 declare module '*.css'
 declare module '*.svg'

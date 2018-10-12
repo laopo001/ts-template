@@ -1,12 +1,13 @@
 
 import dva from 'dva';
-import { count } from './models'
+import { count, user } from './models';
 import { routerConfig } from './router';
-import './style'
+import './style';
 
 const app = dva();
 
 app.model(count);
+app.model(user);
 
 app.router(routerConfig as any);
 

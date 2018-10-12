@@ -1,26 +1,21 @@
 import * as React from 'react';
 import { Route } from 'dva/router';
-import { withRouter } from "react-router-dom";
-import { UserManagement } from "../userManagement/userManagement";
+import { withRouter } from 'react-router-dom';
+import { UserManagement } from '../userManagement/userManagement';
 import { connect } from 'dva';
+import { UserProps } from '../../models';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { PageProps } from '../../types';
 
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
-interface history {
-    push: (url: string) => void
-}
-interface HistoryProps {
-    history: history
-}
-
-class ISider extends React.Component<HistoryProps> {
+class ISider extends React.Component<PageProps & UserProps> {
     state = {
         collapsed: false,
     };
     componentDidMount() {
-
+        this.props.dispatch({ type: 'user/getUserInfo' });
     }
     onCollapse = (collapsed) => {
         console.log(collapsed);
@@ -71,7 +66,14 @@ class ISider extends React.Component<HistoryProps> {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header style={{ background: '#fff', padding: 0 }} />
+                    <Header style={{ background: '#fff', padding: 0 }}>
+                        <a href="/">
+                            <i className="icon">&#xe60a;</i>
+                        </a>
+                        <a href="/accounts/platform">
+                            <i className="icon">&#xe60d;</i>
+                        </a>
+                    </Header>
                     <Content style={{ margin: '0 16px' }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
                             <Breadcrumb.Item>User</Breadcrumb.Item>
@@ -91,6 +93,6 @@ class ISider extends React.Component<HistoryProps> {
     }
 }
 
-export const App = withRouter(connect(({ count }) => ({
-    count
+export const App = withRouter(connect(({ user }) => ({
+    user
 }))(ISider));

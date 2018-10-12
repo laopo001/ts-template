@@ -5,7 +5,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, October 12th 2018, 3:15:31 pm
+ * Last Modified: Friday, October 12th 2018, 4:30:04 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -101,7 +101,7 @@ module.exports = function (env, webpackConfig) {
         mode: 'development',
         performance: { hints: false },
         devServer: {
-            contentBase: path.join(__dirname, 'build'),
+            contentBase: path.join(__dirname, '../build'),
             // compress: true,
             port: 8080
         }

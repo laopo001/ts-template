@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route } from 'dva/router';
+import { Route, Switch, Redirect } from 'dva/router';
 import { withRouter } from 'react-router-dom';
 import { UserManagement } from '../userManagement/userManagement';
 import { connect } from 'dva';
@@ -80,13 +80,17 @@ class ISider extends React.Component<PageProps & UserProps> {
                             <Breadcrumb.Item>Bill</Breadcrumb.Item>
                         </Breadcrumb>
                         <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                            <Route exact path="/UserManagement" component={UserManagement} />
+                            <Switch>
+                                <Route exact path="/UserManagement" component={UserManagement} />
+                                <Redirect to="/UserManagement" />
+                            </Switch>
+
                         </div>
 
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
                         Ant Design ©2018 Created by Ant UED
-          </Footer>
+                    </Footer>
                 </Layout>
             </Layout>
         );

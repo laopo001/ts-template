@@ -59,6 +59,7 @@ module.exports = function (env, webpackConfig) {
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.wasm'],
             alias: {
+                'wasm':  path.resolve(__dirname, `./wasm/pkg/wasm`),
             }
         },
         externals: {
@@ -73,7 +74,7 @@ module.exports = function (env, webpackConfig) {
             port: 8080
         }
     };
-    if(webpackDevServer){
+    if (webpackDevServer) {
         res.plugins.shift()
     }
     return res;

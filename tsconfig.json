@@ -25,12 +25,18 @@
       "./typings"
     ],
     "outDir": "build/output",
-    "types": [
-    ],
+    "types": [],
+    "baseUrl": ".",
+    "paths": {
+      "wasm": [
+        "wasm/pkg"
+      ]
+    },
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "src","typings"
+    "src",
+    "typings"
   ],
   "exclude": [
     "node_modules"

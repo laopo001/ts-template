@@ -7,3 +7,571 @@ error: failed to download from `https://crates.io/api/v1/crates/wasm-bindgen-cli
 Caused by:
   [35] SSL connect error (OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to static.crates.io:443 )
 
+Oct 19 14:36:46.467 ERRO Compilation of your program failed. stderr:
+
+ Downloading crates ...
+  Downloaded cfg-if v0.1.5 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded wasm-bindgen-macro v0.2.25 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded quote v0.6.8 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded console_error_panic_hook v0.1.5 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded proc-macro2 v0.4.20 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded wasm-bindgen-macro-support v0.2.25 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded unicode-xid v0.1.0 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded syn v0.15.12 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded wasm-bindgen-shared v0.2.25 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded serde v1.0.80 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded serde_derive v1.0.80 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded wasm-bindgen-backend v0.2.25 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded log v0.4.5 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded serde_json v1.0.32 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded lazy_static v1.1.0 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded itoa v0.4.3 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded ryu v0.2.6 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+  Downloaded version_check v0.1.5 (registry `git://mirrors.ustc.edu.cn/crates.io-index`)
+   Compiling proc-macro2 v0.4.20
+   Compiling unicode-xid v0.1.0
+   Compiling serde v1.0.80
+   Compiling ryu v0.2.6
+   Compiling version_check v0.1.5
+   Compiling wasm-bindgen-shared v0.2.25
+   Compiling itoa v0.4.3
+   Compiling cfg-if v0.1.5
+   Compiling wasm-bindgen v0.2.25
+   Compiling lazy_static v1.1.0
+   Compiling log v0.4.5
+   Compiling quote v0.6.8
+   Compiling syn v0.15.12
+   Compiling serde_json v1.0.32
+   Compiling serde_derive v1.0.80
+   Compiling wasm-bindgen-backend v0.2.25
+   Compiling wasm-bindgen-macro-support v0.2.25
+   Compiling wasm-bindgen-macro v0.2.25
+   Compiling console_error_panic_hook v0.1.5
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0463]: can't find crate for `js_sys`
+ --> src/lib.rs:3:1
+  |
+3 | extern crate js_sys;
+  | ^^^^^^^^^^^^^^^^^^^^ can't find crate
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0463`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 14:49:45.142 ERRO Compilation of your program failed. stderr:
+
+   Compiling cc v1.0.25
+   Compiling libc v0.2.43
+   Compiling failure_derive v0.1.2
+   Compiling ucd-util v0.1.1
+   Compiling rustc-demangle v0.1.9
+   Compiling regex v1.0.5
+   Compiling utf8-ranges v1.0.1
+   Compiling unicode-segmentation v1.2.1
+   Compiling quick-error v1.2.2
+   Compiling termcolor v1.0.4
+   Compiling sourcefile v0.1.4
+   Compiling memchr v2.1.0
+   Compiling log v0.4.5
+   Compiling regex-syntax v0.6.2
+   Compiling atty v0.2.11
+   Compiling humantime v1.1.1
+   Compiling backtrace-sys v0.1.24
+   Compiling heck v0.3.0
+   Compiling syn v0.14.9
+   Compiling thread_local v0.3.6
+   Compiling backtrace v0.3.9
+   Compiling wasm-bindgen-backend v0.2.25
+   Compiling nom v4.1.1
+   Compiling aho-corasick v0.6.8
+   Compiling weedle v0.8.0
+   Compiling wasm-bindgen-macro-support v0.2.25
+   Compiling synstructure v0.9.0
+   Compiling env_logger v0.5.13
+   Compiling wasm-bindgen-macro v0.2.25
+   Compiling wasm-bindgen v0.2.25
+   Compiling failure v0.1.2
+   Compiling js-sys v0.3.2
+   Compiling console_error_panic_hook v0.1.5
+   Compiling wasm-bindgen-webidl v0.2.19
+   Compiling web-sys v0.3.2
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find function `window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::window().expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `Node` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::Node>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 14:55:57.012 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find function `window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::window().expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `Element` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::Element>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 14:56:03.320 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find function `window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::window().expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `Node` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::Node>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 14:57:50.058 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find function `window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::window().expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `HtmlElement` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::HtmlElement>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^^^^^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 14:58:12.117 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find function `window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::window().expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `Element` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::Element>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:01:51.993 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find function `window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::window().expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `HtmlBodyElement` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::HtmlBodyElement>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^^^^^^^^^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:02:38.876 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find function `window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::window().expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `HtmlBodyElement` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::HtmlBodyElement>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^^^^^^^^^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:03:06.793 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find function `window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::window().expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `HTMLBodyElement` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::HTMLBodyElement>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^^^^^^^^^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:03:18.406 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find function `window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::window().expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `HtmlBodyElement` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::HtmlBodyElement>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^^^^^^^^^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:04:11.031 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find value `Window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::Window.expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `HtmlBodyElement` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::HtmlBodyElement>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^^^^^^^^^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:04:34.623 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find value `Window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::Window.expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `HtmlBodyElement` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::HtmlBodyElement>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^^^^^^^^^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:04:40.567 ERRO Compilation of your program failed. stderr:
+
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0425]: cannot find function `window` in module `web_sys`
+  --> src/lib.rs:34:27
+   |
+34 |     let window = web_sys::window().expect("no global `window` exists");
+   |                           ^^^^^^ not found in `web_sys`
+
+error[E0412]: cannot find type `HtmlBodyElement` in module `web_sys`
+  --> src/lib.rs:45:22
+   |
+45 |     AsRef::<web_sys::HtmlBodyElement>::as_ref(&body).append_child(val.as_ref())?;
+   |                      ^^^^^^^^^^^^^^^ not found in `web_sys`
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:43:36.134 ERRO Compilation of your program failed. stderr:
+
+warning: unused manifest key: dependencies.web-sys.console_error_panic_hook
+warning: unused manifest key: dependencies.web-sys.wee_alloc
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error: character literal may only contain one codepoint
+  --> src/lib.rs:48:5
+   |
+48 |     '123'
+   |     ^^^^^
+help: if you meant to write a `str` literal, use double quotes
+   |
+48 |     "123"
+   |
+
+error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `std::ops::Try`)
+  --> src/lib.rs:40:15
+   |
+40 |     let val = document.create_element("p")?;
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a function that returns `std::string::String`
+   |
+   = help: the trait `std::ops::Try` is not implemented for `std::string::String`
+   = note: required by `std::ops::Try::from_error`
+
+error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `std::ops::Try`)
+  --> src/lib.rs:46:5
+   |
+46 |     std::convert::AsRef::<web_sys::Node>::as_ref(&body).append_child(val.as_ref())?;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a function that returns `std::string::String`
+   |
+   = help: the trait `std::ops::Try` is not implemented for `std::string::String`
+   = note: required by `std::ops::Try::from_error`
+
+error[E0308]: mismatched types
+  --> src/lib.rs:48:5
+   |
+32 | pub fn run() -> String {
+   |                 ------ expected `std::string::String` because of return type
+...
+48 |     '123'
+   |     ^^^^^
+   |     |
+   |     expected struct `std::string::String`, found reference
+   |     help: try using a conversion method: `'123'.to_string()`
+   |
+   = note: expected type `std::string::String`
+              found type `&'static str`
+
+error: aborting due to 4 previous errors
+
+Some errors occurred: E0277, E0308.
+For more information about an error, try `rustc --explain E0277`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:43:53.085 ERRO Compilation of your program failed. stderr:
+
+warning: unused manifest key: dependencies.web-sys.console_error_panic_hook
+warning: unused manifest key: dependencies.web-sys.wee_alloc
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error: character literal may only contain one codepoint
+  --> src/lib.rs:48:5
+   |
+48 |     '123'.to_string()
+   |     ^^^^^
+help: if you meant to write a `str` literal, use double quotes
+   |
+48 |     "123".to_string()
+   |     ^^^^^
+
+error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `std::ops::Try`)
+  --> src/lib.rs:40:15
+   |
+40 |     let val = document.create_element("p")?;
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a function that returns `std::string::String`
+   |
+   = help: the trait `std::ops::Try` is not implemented for `std::string::String`
+   = note: required by `std::ops::Try::from_error`
+
+error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `std::ops::Try`)
+  --> src/lib.rs:46:5
+   |
+46 |     std::convert::AsRef::<web_sys::Node>::as_ref(&body).append_child(val.as_ref())?;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a function that returns `std::string::String`
+   |
+   = help: the trait `std::ops::Try` is not implemented for `std::string::String`
+   = note: required by `std::ops::Try::from_error`
+
+error: aborting due to 3 previous errors
+
+For more information about this error, try `rustc --explain E0277`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:44:02.304 ERRO Compilation of your program failed. stderr:
+
+warning: unused manifest key: dependencies.web-sys.console_error_panic_hook
+warning: unused manifest key: dependencies.web-sys.wee_alloc
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error: character literal may only contain one codepoint
+  --> src/lib.rs:48:5
+   |
+48 |     '123'.to_string();
+   |     ^^^^^
+help: if you meant to write a `str` literal, use double quotes
+   |
+48 |     "123".to_string();
+   |     ^^^^^
+
+error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `std::ops::Try`)
+  --> src/lib.rs:40:15
+   |
+40 |     let val = document.create_element("p")?;
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a function that returns `std::string::String`
+   |
+   = help: the trait `std::ops::Try` is not implemented for `std::string::String`
+   = note: required by `std::ops::Try::from_error`
+
+error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `std::ops::Try`)
+  --> src/lib.rs:46:5
+   |
+46 |     std::convert::AsRef::<web_sys::Node>::as_ref(&body).append_child(val.as_ref())?;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a function that returns `std::string::String`
+   |
+   = help: the trait `std::ops::Try` is not implemented for `std::string::String`
+   = note: required by `std::ops::Try::from_error`
+
+error[E0308]: mismatched types
+  --> src/lib.rs:32:24
+   |
+32 |   pub fn run() -> String {
+   |  ________________________^
+33 | |     // Use `web_sys`'s global `window` function to get a handle on the global
+34 | |     // window object.
+35 | |     let window = web_sys::window().expect("no global `window` exists");
+...  |
+48 | |     '123'.to_string();
+   | |                      - help: consider removing this semicolon
+49 | | }
+   | |_^ expected struct `std::string::String`, found ()
+   |
+   = note: expected type `std::string::String`
+              found type `()`
+
+error: aborting due to 4 previous errors
+
+Some errors occurred: E0277, E0308.
+For more information about an error, try `rustc --explain E0277`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:44:40.408 ERRO Compilation of your program failed. stderr:
+
+warning: unused manifest key: dependencies.web-sys.console_error_panic_hook
+warning: unused manifest key: dependencies.web-sys.wee_alloc
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error: character literal may only contain one codepoint
+  --> src/lib.rs:48:8
+   |
+48 |     Ok('123'.to_string())
+   |        ^^^^^
+help: if you meant to write a `str` literal, use double quotes
+   |
+48 |     Ok("123".to_string())
+   |        ^^^^^
+
+error: aborting due to previous error
+
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+
+Oct 19 15:45:51.814 ERRO Compilation of your program failed. stderr:
+
+warning: unused manifest key: dependencies.web-sys.console_error_panic_hook
+warning: unused manifest key: dependencies.web-sys.wee_alloc
+   Compiling wasm v0.1.0 (/mnt/c/Users/35327/RProjects/wasm-webapp/wasm)
+error[E0308]: mismatched types
+  --> src/lib.rs:32:41
+   |
+32 |   pub fn run() -> Result<String, JsValue> {
+   |  _________________________________________^
+33 | |     // Use `web_sys`'s global `window` function to get a handle on the global
+34 | |     // window object.
+35 | |     let window = web_sys::window().expect("no global `window` exists");
+...  |
+47 | |
+48 | | }
+   | |_^ expected enum `std::result::Result`, found ()
+   |
+   = note: expected type `std::result::Result<std::string::String, wasm_bindgen::JsValue>`
+              found type `()`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0308`.
+error: Could not compile `wasm`.
+
+To learn more, run the command again with --verbose.
+

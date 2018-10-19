@@ -52,3 +52,9 @@ wasm-pack test --headless --firefox
 ```
 wasm-pack publish
 ```
+
+
+```
+rm -rf ~/.cargo/registry
+
+```

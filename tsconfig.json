@@ -29,9 +29,6 @@
     ],
     "allowSyntheticDefaultImports": true
   },
-  "files": [
-    "src/**/*"
-  ],
   "include": [
     "src","typings"
   ],

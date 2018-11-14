@@ -5,12 +5,11 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Tuesday, October 2nd 2018, 11:33:03 pm
+ * Last Modified: Wednesday, November 14th 2018, 4:31:10 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
-import * as wasm from 'rust-npm';
-wasm.greet();
+
 console.log(123)

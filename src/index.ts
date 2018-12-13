@@ -5,11 +5,12 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Wednesday, November 14th 2018, 4:33:07 pm
+ * Last Modified: Thursday, December 6th 2018, 10:39:30 am
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
 
-console.log(123)
+import { Vec3 } from 'hypergl'
+console.log(new Vec3(1, 2, 2))

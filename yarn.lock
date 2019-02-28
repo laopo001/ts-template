@@ -1174,6 +1174,10 @@ camelcase@^4.1.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
   integrity sha1-1UVjW+HjPFQmScaRc+Xeas+uNN0=
 
+"cannon@github:schteppe/cannon.js":
+  version "0.6.2"
+  resolved "https://codeload.github.com/schteppe/cannon.js/tar.gz/569730f94a1d9da47967a24fad0323ef7d5b4119"
+
 capture-exit@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/capture-exit/-/capture-exit-1.2.0.tgz#1c5fcc489fd0ab00d4f1ac7ae1072e3173fbab6f"
@@ -3369,13 +3373,15 @@ humanize-ms@^1.2.0:
   dependencies:
     ms "^2.0.0"
 
-hypergl@0.0.1-nightly.20181213.0:
-  version "0.0.1-nightly.20181213.0"
-  resolved "https://registry.npmjs.org/hypergl/-/hypergl-0.0.1-nightly.20181213.0.tgz#a33acc8946e79f9e4a224def8a21599f5f67c1d3"
-  integrity sha512-9sKZBuxYw4i5zt0qrIyMF8jtKJekbkJNXDEOdwt+V6cxHpKVroFmVmsjxi18SdKG0lPHbgfU1qiP08G30cGRjg==
+hypergl@0.0.1-nightly.20190227.1:
+  version "0.0.1-nightly.20190227.1"
+  resolved "https://registry.npmjs.org/hypergl/-/hypergl-0.0.1-nightly.20190227.1.tgz#fdadfce924c3ae2d6b723a64f51d1021485f893e"
+  integrity sha512-otYujEZZt38Tp0lQQVkkzccUYjIUgXj1FWpOLCrY4keYwqpXO4oW4ZKka/iBlPl8d4WlzHzAFrZ9FR3beHxPXg==
   dependencies:
+    cannon schteppe/cannon.js
     howler "^2.0.15"
     isomorphic-fetch "^2.2.1"
+    laopo001-ammo "^0.0.3"
     reflect-metadata "^0.1.12"
 
 iconv-lite@0.4.19:
@@ -4412,6 +4418,11 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
+
+laopo001-ammo@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/laopo001-ammo/-/laopo001-ammo-0.0.3.tgz#8a73cdda0110ef1080bcd9de81c743bab3719a29"
+  integrity sha512-lUY9Qarn8IbicqQ90kGLSQojlP1KRJJ590BC1MuXaJCDhDjnDXK6nTdIu0K0IUmqXHuFKdeq6nal/EKP4ZhS1g==
 
 lazy-cache@^1.0.3:
   version "1.0.4"

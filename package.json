@@ -43,7 +43,7 @@
     "node": ">= 0.6.12"
   },
   "dependencies": {
-    "hypergl": "0.0.1-nightly.20181213.0",
+    "hypergl": "0.0.1-nightly.20190227.1",
     "whatwg-fetch": "^2.0.4"
   }
 }

@@ -5,7 +5,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Monday, April 1st 2019, 7:17:17 pm
+ * Last Modified: Monday, April 1st 2019, 9:35:14 pm
  * Modified By:
  * -----
  * Copyright (c) 2019 liaodh
@@ -25,6 +25,11 @@ export class MacroTask<T> implements Promise<T> {
         setTimeout(() => {
             try {
                 this.value = callback();
+                if (this.value instanceof MacroTask || this.value instanceof MacroTask) {
+                    this.value.then(v => {
+                        this.value = v;
+                    })
+                }
                 this.state = STATE.FULFILLED;
             } catch (e) {
                 this.state = STATE.REJECTED;
@@ -42,6 +47,9 @@ export class MacroTask<T> implements Promise<T> {
     }
     static run<T>(callback: (...args) => T, time: number = 0) {
         return new MacroTask(callback, time);
+    }
+    static resolve(value, time: number = 0) {
+        return MacroTask.run(() => value, time);
     }
     then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2> {
         if (this.state === STATE.PENDING) {

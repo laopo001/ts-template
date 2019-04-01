@@ -5,7 +5,7 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Monday, April 1st 2019, 7:17:23 pm
+ * Last Modified: Monday, April 1st 2019, 9:30:21 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
@@ -18,9 +18,22 @@ MacroTask.run(function () {
 }).then(x => {
 })
 
-let t = new MacroTask(function (resolve, reject) {
-    resolve(456);
+let t = new MacroTask(function () {
+    return 456
 }).then((res) => {
     console.log(res);
 })
+function macro() {
+    return MacroTask.run(x => MacroTask.run(x => 'zxxx'));
+}
+
+async function main() {
+    let res = await MacroTask.resolve(Promise.resolve('asdfasdf')).then(x => {
+        return x;
+    });
+    // res = await macro();
+    console.log(res);
+}
+main()
+
 console.log(123)

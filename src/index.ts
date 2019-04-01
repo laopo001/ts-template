@@ -5,12 +5,11 @@
  * @author: liaodh
  * @summary: short description for the file
  * -----
- * Last Modified: Friday, October 19th 2018, 10:50:12 am
+ * Last Modified: Monday, April 1st 2019, 5:04:54 pm
  * Modified By: liaodh
  * -----
  * Copyright (c) 2018 jiguang
  */
 
-import * as wasm from 'wasm';
-wasm.greet();
+
 console.log(123)

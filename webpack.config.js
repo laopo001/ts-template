@@ -7,7 +7,7 @@ module.exports = function (env, webpackConfig) {
     let res = {
         //页面入口文件配置
         entry: {
-            index: `./src/bootstrap`
+            index: `./src/index`
         },
         //入口文件输出配置
         output: {
@@ -59,7 +59,7 @@ module.exports = function (env, webpackConfig) {
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.wasm'],
             alias: {
-                'wasm':  path.resolve(__dirname, `./wasm/pkg/wasm`),
+                'wasm': path.resolve(__dirname, `./wasm/pkg/wasm`),
             }
         },
         externals: {
